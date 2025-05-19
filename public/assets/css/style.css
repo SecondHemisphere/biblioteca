@@ -272,18 +272,19 @@ footer {
 /* Contenedor principal de paginación */
 .paginacion-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .paginacion-info {
     color: #555;
-    font-size: 14px;
-    text-align: center;
+    font-size: 16px;
+    text-align: end;
     width: 100%;
-    max-width: 400px;
+    max-width: 50rem;
     box-sizing: border-box;
+    margin-right: 5rem;
 }
 
 .highlight {
@@ -292,26 +293,24 @@ footer {
 }
 
 .paginacion-container nav {
-    width: 100%;
+    width: 49%;
     max-width: 100%;
-    overflow-x: auto;
     background-color: transparent;
-    justify-content: center;
     box-shadow: none;
+    text-align: end;
+    box-sizing: border-box;
+    margin-left: 0rem;
 }
-
 .paginacion-list {
     display: flex;
     list-style: none;
-    padding: 1;
-    margin: 1;
-    justify-content: center;
-    gap: 5px;
     flex-wrap: wrap;
+    color: #555;
+    font-size: 16px;
 }
 
 .paginacion-item {
-    margin: 1px;
+    margin-inline-end: 10px;
 }
 
 .paginacion-link {

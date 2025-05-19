@@ -88,11 +88,6 @@
     </div>
     
     <div class="paginacion-container">
-            <div class="paginacion-info">
-                Mostrando <span class="highlight"><?= $inicio ?></span> a <span class="highlight"><?= $fin ?></span> de <span class="highlight"><?= $total_registros ?></span> Entradas
-            </div>
-
-            
                 <nav>
                     <ul class="paginacion-list">
                         <li class="paginacion-item <?= $pagina_actual <= 1 ? 'disabled' : '' ?>">
@@ -110,6 +105,11 @@
                         </li>
                     </ul>
                 </nav>
+
+            <div class="paginacion-info">
+                Mostrando <span class="highlight"><?= $inicio ?></span> a <span class="highlight"><?= $fin ?></span> de <span class="highlight"><?= $total_registros ?></span> Entradas
+            </div>
+
     </div>
 </div>
 

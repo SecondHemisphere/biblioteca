@@ -51,8 +51,8 @@
     margin: 0 auto;
     border-collapse: collapse;
     font-size: 1.4rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 0rem;
 }
 
 .contenedor-tabla-estudiantes th,
