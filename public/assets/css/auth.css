@@ -1,0 +1,62 @@
+.contenedor-autenticacion {
+    background-color: white;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.4rem 0.6rem rgba(0,0,0,0.1);
+    padding: 3rem;
+    width: 100%;
+    max-width: 40rem;
+}
+
+.titulo-autenticacion {
+    color: #2c3e50;
+    margin-bottom: 2.4rem;
+    text-align: center;
+    font-size: 2.4rem;
+}
+
+.grupo-formulario {
+    margin-bottom: 1rem;
+}
+
+.grupo-formulario label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-size: 1.6rem;
+}
+
+.grupo-formulario input {
+    width: 100%;
+    padding: 1rem;
+    border: 0.1rem solid #ddd;
+    border-radius: 0.4rem;
+    font-size: 1.6rem;
+}
+
+.boton-principal {
+    width: 100%;
+    padding: 1.2rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 0.4rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.boton-principal:hover {
+    background-color: #2980b9;
+}
+
+.texto-secundario {
+    text-align: center;
+    margin-top: 2.4rem;
+    color: #666;
+    font-size: 1.6rem;
+}
+
+.logo {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
