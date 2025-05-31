@@ -8,6 +8,7 @@
 
     <?php
         $student = $data['student'];
+        $errors = $errors ?? [];
         $form_action = "/students/update/{$student->id}";
         $submit_text = "Actualizar";
         $careers = $data['careers'];

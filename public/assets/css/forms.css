@@ -118,20 +118,9 @@
 /* Estilos para errores */
 .campo .error {
     color: #e74c3c;
-    font-size: 0.85rem;
+    font-size: 1.4rem;
     margin-top: 0.5rem;
     display: block;
-}
-
-.campo.error-input input,
-.campo.error-input select {
-    border-color: #e74c3c;
-    background-color: #fef0f0;
-}
-
-.campo.error-input input:focus,
-.campo.error-input select:focus {
-    box-shadow: 0 0 0 0.3rem rgba(231, 76, 60, 0.2);
 }
 
 /* Estilo para el contenedor principal */

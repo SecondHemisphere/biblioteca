@@ -183,31 +183,31 @@ class Student {
      */
     public function validateStudentData($data) {
         $errors = [];
-        
+
         if (empty($data['codigo'])) {
-            $errors[] = 'El código es requerido';
+            $errors['codigo'] = 'El código es requerido';
         } elseif ($this->findStudentByCode($data['codigo'])) {
-            $errors[] = 'El código ya está registrado';
+            $errors['codigo'] = 'El código ya está registrado';
         }
-        
+
         if (empty($data['dni'])) {
-            $errors[] = 'El DNI es requerido';
+            $errors['dni'] = 'El DNI es requerido';
         } elseif (!$this->validateDni($data['dni'])) {
-            $errors[] = 'El DNI debe tener 10 dígitos numéricos';
+            $errors['dni'] = 'El DNI debe tener 10 dígitos numéricos';
         } elseif ($this->findStudentByDni($data['dni'])) {
-            $errors[] = 'El DNI ya está registrado';
+            $errors['dni'] = 'El DNI ya está registrado';
         }
-        
+
         if (empty($data['nombre'])) {
-            $errors[] = 'El nombre es requerido';
+            $errors['nombre'] = 'El nombre es requerido';
         } elseif (strlen($data['nombre']) > 100) {
-            $errors[] = 'El nombre no puede exceder los 100 caracteres';
+            $errors['nombre'] = 'El nombre no puede exceder los 100 caracteres';
         }
-        
+
         if (empty($data['carrera'])) {
-            $errors[] = 'La carrera es requerida';
+            $errors['carrera'] = 'La carrera es requerida';
         }
-        
+
         return empty($errors) ? true : $errors;
     }
     
@@ -217,43 +217,36 @@ class Student {
      * @param array $data Datos a validar
      * @return array|true Lista de errores o true si es válido
      */
-    public function validateUpdateData($id, $data) {
+    public function validateUpdateData($data, $currentStudent) {
         $errors = [];
-        $currentStudent = $this->getStudentById($id);
-        
-        if (!$currentStudent) {
-            return ['Estudiante no encontrado'];
-        }
-        
+
         if (empty($data['codigo'])) {
-            $errors[] = 'El código es requerido';
-        } elseif ($data['codigo'] !== $currentStudent->codigo) {
-            if ($this->findStudentByCode($data['codigo'])) {
-                $errors[] = 'El código ya está registrado por otro estudiante';
-            }
+            $errors['codigo'] = 'El código es requerido';
+        } elseif ($data['codigo'] !== $currentStudent->codigo && $this->findStudentByCode($data['codigo'])) {
+            $errors['codigo'] = 'El código ya está registrado';
         }
-        
+
         if (empty($data['dni'])) {
-            $errors[] = 'El DNI es requerido';
+            $errors['dni'] = 'El DNI es requerido';
         } elseif (!$this->validateDni($data['dni'])) {
-            $errors[] = 'El DNI debe tener 10 dígitos numéricos';
-        } elseif ($data['dni'] !== $currentStudent->dni) {
-            if ($this->findStudentByDni($data['dni'])) {
-                $errors[] = 'El DNI ya está registrado por otro estudiante';
-            }
+            $errors['dni'] = 'El DNI debe tener 10 dígitos numéricos';
+        } elseif ($data['dni'] !== $currentStudent->dni && $this->findStudentByDni($data['dni'])) {
+            $errors['dni'] = 'El DNI ya está registrado';
         }
-        
+
         if (empty($data['nombre'])) {
-            $errors[] = 'El nombre es requerido';
+            $errors['nombre'] = 'El nombre es requerido';
+        } elseif (strlen($data['nombre']) > 100) {
+            $errors['nombre'] = 'El nombre no puede exceder los 100 caracteres';
         }
-        
+
         if (empty($data['carrera'])) {
-            $errors[] = 'La carrera es requerida';
+            $errors['carrera'] = 'La carrera es requerida';
         }
-        
+
         return empty($errors) ? true : $errors;
     }
-    
+
     /**
      * Valida que el DNI tenga el formato correcto
      * @param string $dni DNI a validar

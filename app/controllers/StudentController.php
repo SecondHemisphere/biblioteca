@@ -34,10 +34,12 @@ class StudentController {
     public function create() {
         $data = [
             'title' => 'Registrar Nuevo Estudiante',
-            'careers' => ['Ingeniería de sistemas', 'Ingeniería', 'Medicina', 'Derecho', 'Administración']
+            'careers' => ['Ingeniería de sistemas', 'Ingeniería', 'Medicina', 'Derecho', 'Administración'],
+            'student' => new stdClass(),  // Evita error de variable no definida en el formulario
+            'errors' => [],
+            'form_action' => '/students/store',
+            'current_page' => 'students'
         ];
-
-        $current_page = 'students';
 
         $view = __DIR__ . '/../views/students/create.php';
         require_once __DIR__ . '/../views/layouts/layout.php';
@@ -45,27 +47,36 @@ class StudentController {
 
     public function store() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = [
-                'codigo' => trim($_POST['codigo']),
-                'dni' => trim($_POST['dni']),
-                'nombre' => trim($_POST['nombre']),
-                'carrera' => trim($_POST['carrera']),
+            $dataInput = [
+                'codigo'    => trim($_POST['codigo']),
+                'dni'       => trim($_POST['dni']),
+                'nombre'    => trim($_POST['nombre']),
+                'carrera'   => trim($_POST['carrera']),
                 'direccion' => trim($_POST['direccion']),
-                'telefono' => trim($_POST['telefono']),
-                'estado' => (int) trim($_POST['estado'])
+                'telefono'  => trim($_POST['telefono']),
+                'estado'    => (int) trim($_POST['estado'])
             ];
 
-            $result = $this->studentModel->register($data);
+            $validation = $this->studentModel->validateStudentData($dataInput);
 
-            if ($result['success']) {
+            if ($validation === true) {
+                $this->studentModel->register($dataInput);
                 $_SESSION['success_message'] = 'Estudiante registrado correctamente';
                 header('Location: /students');
+                exit;
             } else {
-                $_SESSION['error_message'] = implode('<br>', $result['errors']);
-                header('Location: /students/create');
-            }
+                $data = [
+                    'title' => 'Registrar Nuevo Estudiante',
+                    'student' => (object) $dataInput,
+                    'errors' => $validation,
+                    'careers' => ['Ingeniería de sistemas', 'Ingeniería', 'Medicina', 'Derecho', 'Administración'],
+                    'form_action' => '/students/store',
+                    'current_page' => 'students'
+                ];
 
-            exit;
+                $view = __DIR__ . '/../views/students/create.php';
+                require_once __DIR__ . '/../views/layouts/layout.php';
+            }
         }
     }
 
@@ -81,39 +92,66 @@ class StudentController {
         $data = [
             'title' => 'Editar Estudiante',
             'student' => $student,
-            'careers' => ['Ingeniería de sistemas', 'Ingeniería', 'Medicina', 'Derecho', 'Administración']
+            'careers' => ['Ingeniería de sistemas', 'Ingeniería', 'Medicina', 'Derecho', 'Administración'],
+            'errors' => [],
+            'form_action' => "/students/update/$id",
+            'current_page' => 'students'
         ];
 
-        $current_page = 'students';
-
-        require_once __DIR__ . '/../views/layouts/navbar.php';
-        require_once __DIR__ . '/../views/students/edit.php';
-        require_once __DIR__ . '/../views/layouts/sidebar.php';
+        $view = __DIR__ . '/../views/students/edit.php';
+        require_once __DIR__ . '/../views/layouts/layout.php';
     }
 
     public function update($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = [
-                'codigo' => trim($_POST['codigo']),
-                'dni' => trim($_POST['dni']),
-                'nombre' => trim($_POST['nombre']),
-                'carrera' => trim($_POST['carrera']),
-                'direccion' => trim($_POST['direccion']),
-                'telefono' => trim($_POST['telefono']),
-                'estado' => (int) trim($_POST['estado'])
+            // 1. Recoger y limpiar datos
+            $dataInput = [
+                'codigo'    => trim($_POST['codigo'] ?? ''),
+                'dni'       => trim($_POST['dni'] ?? ''),
+                'nombre'    => trim($_POST['nombre'] ?? ''),
+                'carrera'   => trim($_POST['carrera'] ?? ''),
+                'direccion' => trim($_POST['direccion'] ?? ''),
+                'telefono'  => trim($_POST['telefono'] ?? ''),
+                'estado'    => (int) ($_POST['estado'] ?? 0)
             ];
 
-            $result = $this->studentModel->update($id, $data);
+            // 2. Depuración (puedes eliminar esto después)
+            error_log("Datos recibidos para actualización: " . print_r($dataInput, true));
 
-            if ($result['success']) {
-                $_SESSION['success_message'] = 'Estudiante actualizado correctamente';
+            // 3. Validación
+            $validation = $this->studentModel->validateUpdateData($id, $dataInput);
+
+            if ($validation === true) {
+                // 4. Si la validación es exitosa
+                $result = $this->studentModel->update($id, $dataInput);
+                
+                if ($result) {
+                    $_SESSION['success_message'] = 'Estudiante actualizado correctamente';
+                } else {
+                    $_SESSION['error_message'] = 'Error al actualizar el estudiante';
+                }
+                
                 header('Location: /students');
+                exit;
             } else {
-                $_SESSION['error_message'] = implode('<br>', $result['errors']);
-                header("Location: /students/edit/$id");
-            }
+                // 5. Si hay errores de validación
+                error_log("Errores de validación: " . print_r($validation, true));
+                
+                // Cargar los datos originales para mantener consistencia
+                $originalStudent = $this->studentModel->getStudentById($id);
+                
+                $data = [
+                    'title' => 'Editar Estudiante',
+                    'student' => (object) array_merge((array) $originalStudent, $dataInput),
+                    'errors' => $validation,
+                    'careers' => ['Ingeniería de sistemas', 'Ingeniería', 'Medicina', 'Derecho', 'Administración'],
+                    'form_action' => "/students/update/$id",
+                    'current_page' => 'students'
+                ];
 
-            exit;
+                $view = __DIR__ . '/../views/students/edit.php';
+                require_once __DIR__ . '/../views/layouts/layout.php';
+            }
         }
     }
 

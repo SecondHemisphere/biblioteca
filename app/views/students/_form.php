@@ -1,48 +1,22 @@
-<?php
-// Función helper para mostrar errores de campo (puede ir en un archivo aparte de helpers)
-function displayFieldError($field, $errors) {
-    if (isset($errors[$field])) {
-        return '<span class="error">' . htmlspecialchars($errors[$field]) . '</span>';
-    }
-    return '';
-}
-
-// Función para procesar errores de sesión (puede convertir errores generales en específicos)
-function processSessionErrors(&$errors) {
-    if (!empty($_SESSION['error_message'])) {
-        // Intenta parsear el mensaje para asociarlo a un campo (formato "campo: mensaje")
-        $parts = explode(': ', $_SESSION['error_message'], 2);
-        
-        if (count($parts) === 2) {
-            $errors[$parts[0]] = $parts[1]; // Asocia el error al campo
-        } else {
-            // Si no sigue el formato, muestra como error general
-            echo '<div class="alert alert-danger">' . htmlspecialchars($_SESSION['error_message']) . '</div>';
-        }
-        
-        unset($_SESSION['error_message']);
-    }
-}
-
-// Procesar errores de sesión antes de mostrar el formulario
-processSessionErrors($errors);
-?>
-
-<form action="<?= htmlspecialchars($form_action) ?>" method="POST">
+<form action="<?= $form_action ?>" method="POST" novalidate>
     <!-- Grupo 1: Datos de identificación -->
     <div class="grupo-campos">
         <div class="campo <?= isset($errors['codigo']) ? 'error-input' : '' ?>">
             <label for="codigo">Código</label>
             <input type="text" name="codigo" id="codigo"
                    value="<?= htmlspecialchars($student->codigo ?? '') ?>" required>
-            <?= displayFieldError('codigo', $errors) ?>
+            <?php if (isset($errors['codigo'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['codigo']) ?></span>
+            <?php endif; ?>
         </div>
         
         <div class="campo <?= isset($errors['dni']) ? 'error-input' : '' ?>">
             <label for="dni">DNI</label>
             <input type="text" name="dni" id="dni"
                    value="<?= htmlspecialchars($student->dni ?? '') ?>" required>
-            <?= displayFieldError('dni', $errors) ?>
+            <?php if (isset($errors['dni'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['dni']) ?></span>
+            <?php endif; ?>
         </div>
         
         <div class="campo">
@@ -60,7 +34,9 @@ processSessionErrors($errors);
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" id="nombre"
                    value="<?= htmlspecialchars($student->nombre ?? '') ?>" required>
-            <?= displayFieldError('nombre', $errors) ?>
+            <?php if (isset($errors['nombre'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['nombre']) ?></span>
+            <?php endif; ?>
         </div>
         
         <div class="campo campo-ancho <?= isset($errors['carrera']) ? 'error-input' : '' ?>">
@@ -74,7 +50,9 @@ processSessionErrors($errors);
                     </option>
                 <?php endforeach; ?>
             </select>
-            <?= displayFieldError('carrera', $errors) ?>
+            <?php if (isset($errors['carrera'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['carrera']) ?></span>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -84,14 +62,18 @@ processSessionErrors($errors);
             <label for="direccion">Dirección</label>
             <input type="text" name="direccion" id="direccion"
                    value="<?= htmlspecialchars($student->direccion ?? '') ?>">
-            <?= displayFieldError('direccion', $errors) ?>
+            <?php if (isset($errors['direccion'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['direccion']) ?></span>
+            <?php endif; ?>
         </div>
         
         <div class="campo <?= isset($errors['telefono']) ? 'error-input' : '' ?>">
             <label for="telefono">Teléfono</label>
             <input type="text" name="telefono" id="telefono"
                    value="<?= htmlspecialchars($student->telefono ?? '') ?>">
-            <?= displayFieldError('telefono', $errors) ?>
+            <?php if (isset($errors['telefono'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['telefono']) ?></span>
+            <?php endif; ?>
         </div>
     </div>
 

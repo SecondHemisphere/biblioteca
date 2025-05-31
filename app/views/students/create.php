@@ -3,6 +3,7 @@
     
     <?php
         $student = [];
+        $errors = $errors ?? [];
         $form_action = "/students/store";
         $submit_text = "Registrar";
         $careers = $data['careers'];

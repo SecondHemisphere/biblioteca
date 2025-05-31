@@ -12,6 +12,7 @@
         <main class="contenedor-principal">
             <?php
             if (isset($view)) {
+                if (isset($data)) extract($data);
                 require_once $view;
             } else {
                 echo "<p>Error: vista no especificada.</p>";
@@ -19,5 +20,6 @@
             ?>
         </main>
     </div>
+    <script src="js/forms.js" ></script>
 </body>
 </html>
