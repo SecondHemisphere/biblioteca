@@ -13,6 +13,37 @@
     $estudiantes_paginados = array_slice($data['students'], $offset, $por_pagina);
 ?>
 
+<?php
+// Mostrar mensaje de éxito
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    echo '<div class="alert alert-success">Estudiante creado correctamente</div>';
+}
+
+// Mostrar mensajes de error (si los pasas por URL)
+if (isset($_GET['error'])) {
+    echo '<div class="alert alert-error">Error: ' . htmlspecialchars($_GET['error']) . '</div>';
+}
+?>
+
+<style>
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.alert-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+</style>
+
 <div class="contenedor-estudiantes">
     <h1><?= htmlspecialchars($data['title']) ?></h1>
     
@@ -35,7 +66,7 @@
         <h2>Mostrar | <?= $por_pagina ?> | Entradas</h2>
 
         <div class="nuevo-estudiante">
-            <a href="/students/create" class="btn btn-primary">
+            <a type="button" class="btn btn-primary" href="/students/create">
                 <i class="fas fa-plus"></i> Nuevo Estudiante
             </a>
         </div>
@@ -114,6 +145,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="/assets/js/scripts.js"></script>
+<script src="/assets/js/modal.js"></script>
 </body>
 </html>
