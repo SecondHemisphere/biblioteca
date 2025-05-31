@@ -48,36 +48,26 @@ class StudentController {
 
     public function store() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $dni = trim($_POST['dni']);
-            if (!$this->studentModel->validateDni($dni)) {
-                $_SESSION['error_message'] = 'El DNI debe tener 8 dígitos numéricos';
-                header('Location: /students/create');
-                exit;
-            }
-
             $data = [
                 'codigo' => trim($_POST['codigo']),
-                'dni' => $dni,
+                'dni' => trim($_POST['dni']),
                 'nombre' => trim($_POST['nombre']),
                 'carrera' => trim($_POST['carrera']),
                 'direccion' => trim($_POST['direccion']),
                 'telefono' => trim($_POST['telefono']),
-                'estado' => trim($_POST['estado'])
+                'estado' => (int) trim($_POST['estado'])
             ];
 
-            if ($this->studentModel->findStudentByDni($data['dni'])) {
-                $_SESSION['error_message'] = 'El DNI ya está registrado';
-                header('Location: /students/create');
-                exit;
-            }
+            $result = $this->studentModel->register($data);
 
-            if ($this->studentModel->register($data)) {
+            if ($result['success']) {
                 $_SESSION['success_message'] = 'Estudiante registrado correctamente';
+                header('Location: /students');
             } else {
-                $_SESSION['error_message'] = 'Error al registrar el estudiante';
+                $_SESSION['error_message'] = implode('<br>', $result['errors']);
+                header('Location: /students/create');
             }
 
-            header('Location: /students');
             exit;
         }
     }
@@ -106,37 +96,26 @@ class StudentController {
 
     public function update($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $dni = trim($_POST['dni']);
-            if (!$this->studentModel->validateDni($dni)) {
-                $_SESSION['error_message'] = 'El DNI debe tener 8 dígitos numéricos';
-                header("Location: /students/edit/$id");
-                exit;
-            }
-
             $data = [
                 'codigo' => trim($_POST['codigo']),
-                'dni' => $dni,
+                'dni' => trim($_POST['dni']),
                 'nombre' => trim($_POST['nombre']),
                 'carrera' => trim($_POST['carrera']),
                 'direccion' => trim($_POST['direccion']),
                 'telefono' => trim($_POST['telefono']),
-                'estado' => trim($_POST['estado'])
+                'estado' => (int) trim($_POST['estado'])
             ];
 
-            $existingStudent = $this->studentModel->findStudentByDni($data['dni']);
-            if ($existingStudent && $existingStudent->id != $id) {
-                $_SESSION['error_message'] = 'El DNI ya está registrado por otro estudiante';
-                header("Location: /students/edit/$id");
-                exit;
-            }
+            $result = $this->studentModel->update($id, $data);
 
-            if ($this->studentModel->update($id, $data)) {
+            if ($result['success']) {
                 $_SESSION['success_message'] = 'Estudiante actualizado correctamente';
+                header('Location: /students');
             } else {
-                $_SESSION['error_message'] = 'Error al actualizar el estudiante';
+                $_SESSION['error_message'] = implode('<br>', $result['errors']);
+                header("Location: /students/edit/$id");
             }
 
-            header('Location: /students');
             exit;
         }
     }

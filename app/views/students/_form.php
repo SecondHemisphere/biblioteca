@@ -45,8 +45,8 @@
     <div class="form-group">
         <label for="estado">Estado</label>
         <select name="estado" id="estado" class="form-control" required>
-            <option value="activo" <?= (isset($student['estado']) && $student['estado'] === 'activo') ? 'selected' : '' ?>>Activo</option>
-            <option value="inactivo" <?= (isset($student['estado']) && $student['estado'] === 'inactivo') ? 'selected' : '' ?>>Inactivo</option>
+            <option value="1" <?= (isset($student['estado']) && $student['estado'] == 1) ? 'selected' : '' ?>>Activo</option>
+            <option value="0" <?= (isset($student['estado']) && $student['estado'] == 0) ? 'selected' : '' ?>>Inactivo</option>
         </select>
     </div>
 

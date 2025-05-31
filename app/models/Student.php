@@ -90,7 +90,7 @@ class Student {
             return ['success' => false, 'errors' => $validation];
         }
         
-        $this->db->query('INSERT INTO estudiantes (codigo, dni, nombre, carrera, direccion, telefono, estado) 
+        $this->db->query('INSERT INTO estudiantes (codigo, dni, nombre, carrera, direccion, telefono, estado)
                          VALUES (:codigo, :dni, :nombre, :carrera, :direccion, :telefono, :estado)');
         
         $this->db->bind(':codigo', $data['codigo']);
@@ -103,7 +103,7 @@ class Student {
         
         $success = $this->db->execute();
         return [
-            'success' => $success, 
+            'success' => $success,
             'id' => $success ? $this->db->lastInsertId() : null
         ];
     }
@@ -120,7 +120,7 @@ class Student {
             return ['success' => false, 'errors' => $validation];
         }
         
-        $this->db->query('UPDATE estudiantes SET 
+        $this->db->query('UPDATE estudiantes SET
                          codigo = :codigo,
                          dni = :dni,
                          nombre = :nombre,
