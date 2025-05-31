@@ -7,10 +7,11 @@
     <?php endif; ?>
 
     <?php
+        $student = [];
         $form_action = "/students/store";
         $submit_text = "Registrar";
-        $student = [];  // vacío
         $careers = $data['careers'];
         include __DIR__ . '/_form.php';
     ?>
 </div>
+

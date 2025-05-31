@@ -23,12 +23,17 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
     background-color: var(--color-fondo);
+    min-height: 100vh;
 }
 
+/* NUEVO CONTENEDOR DE PÁGINA */
+.layout-principal {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* NAV */
 nav {
     background-color: var(--color-primario);
     box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
@@ -49,7 +54,7 @@ nav a:last-child {
     margin-left: 0;
 }
 
-nav a i{
+nav a i {
     margin-right: 0.5rem;
 }
 
@@ -58,14 +63,13 @@ nav a:hover {
     text-decoration: underline;
 }
 
+/* CONTENIDO PRINCIPAL */
 .contenedor-principal {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 3rem;
 }
 
+/* ENLACES */
 .enlace {
     color: var(--color-enlace);
     text-decoration: none;
@@ -76,6 +80,7 @@ nav a:hover {
     text-decoration: underline;
 }
 
+/* MENSAJES */
 .mensaje-error {
     background-color: var(--color-error-fondo);
     color: var(--color-error-texto);
@@ -99,10 +104,10 @@ footer {
     color: var(--color-texto);
     text-align: center;
     padding: 1rem;
-    margin-top: auto;
     font-size: 1.6rem;
 }
 
+/* MODAL ALERTAS */
 .modal-alert {
     position: fixed;
     top: 0;
@@ -148,7 +153,7 @@ footer {
     background-color: #1a252f;
 }
 
-/* Sección de Cerrar Sesión*/
+/* LOGOUT */
 .logout-section {
     background-color: #fd6554;
     padding: 1rem;
@@ -158,19 +163,21 @@ footer {
     background-color: #e74c3c;
 }
 
-/* Estilos para el sidebar */
+/* SIDEBAR - ADAPTATIVO */
 .sidebar {
-    height: 100%;
     background-color: #2c3e50;
     color: #ecf0f1;
-    display: inline-flexbox;
+    display: flex;
     flex-direction: column;
-    position: fixed;
-    left: 0;
-    top: 0;
     box-shadow: 0.2rem 0 0.5rem rgba(0, 0, 0, 0.1);
+    min-width: 20rem;
+    max-width: 25rem;
+    width: auto;
+    height: auto;
+    position: relative; /* <- permite que crezca según contenido */
 }
 
+/* SIDEBAR - LOGO */
 .sidebar-logo {
     display: flex;
     align-items: center;
@@ -184,181 +191,92 @@ footer {
 }
 
 .sidebar-logo i {
-  font-size: 2.2rem;
-  color: #f1c40f;
+    font-size: 2.2rem;
+    color: #f1c40f;
 }
 
-/* Sección de usuario */
+/* SIDEBAR - USUARIO */
 .user-info {
-  display: flex;
-  align-items: center;
-  padding: 2rem;
-  gap: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .user-avatar {
-  width: 4rem;
-  height: 4rem;
-  background-color: #1abc9c;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.6rem;
-}
-
-.user-details {
-  flex: 1;
-}
-
-.user-name {
-  font-weight: bold;
-  margin-bottom: 0.3rem;
-  font-size: 1.6rem;
-}
-
-.user-role {
-  font-size: 1.4rem;
-  color: #bdc3c7;
-}
-
-/* Menú */
-.sidebar-menu {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1rem 0;
-}
-
-.sidebar-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.sidebar-menu li {
-  transition: background-color 0.2s;
-}
-
-.sidebar-menu li a {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.2rem 2rem;
-  text-decoration: none;
-  color: inherit;
-  font-size: 1.7rem;
-}
-
-.sidebar-menu li:hover {
-  background-color: #34495e;
-}
-
-.sidebar-menu li.active {
-  background-color: #1abc9c;
-}
-
-.sidebar-menu li.active a {
-  color: #fff;
-}
-
-.sidebar-menu i {
-  width: 2rem;
-  text-align: center;
-  font-size: 1.7rem;
-}
-
-/* Contenedor principal de paginación */
-.paginacion-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.paginacion-info {
-    color: #555;
-    font-size: 16px;
-    text-align: end;
-    width: 100%;
-    max-width: 50rem;
-    box-sizing: border-box;
-    margin-right: 5rem;
-}
-
-.highlight {
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-.paginacion-container nav {
-    width: 49%;
-    max-width: 100%;
-    background-color: transparent;
-    box-shadow: none;
-    text-align: end;
-    box-sizing: border-box;
-    margin-left: 0rem;
-}
-.paginacion-list {
-    display: flex;
-    list-style: none;
-    flex-wrap: wrap;
-    color: #555;
-    font-size: 16px;
-}
-
-.paginacion-item {
-    margin-inline-end: 10px;
-}
-
-.paginacion-link {
+    width: 4rem;
+    height: 4rem;
+    background-color: #1abc9c;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 40px;
-    height: 40px;
-    padding: 0 12px;
-    border-radius: 6px;
-    color: #3498db;
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+.user-details {
+    flex: 1;
+}
+
+.user-name {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    font-size: 1.6rem;
+}
+
+.user-role {
+    font-size: 1.4rem;
+    color: #bdc3c7;
+}
+
+/* SIDEBAR - MENÚ */
+.sidebar-menu {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 0;
+}
+
+.sidebar-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    transition: background-color 0.2s;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 2rem;
     text-decoration: none;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    border: 1px solid #dee2e6;
-    white-space: nowrap;
+    color: inherit;
+    font-size: 1.7rem;
 }
 
-.paginacion-link:hover {
-    border-color: #eef0f3;
+.sidebar-menu li:hover {
+    background-color: #34495e;
 }
 
-.paginacion-item.active .paginacion-link {
-    background-color: #3498db;
-    border-color: #3498db;
-    color: white;
+.sidebar-menu li.active {
+    background-color: #1abc9c;
 }
 
-.paginacion-item.disabled .paginacion-link {
-    color: #adb5bd;
-    pointer-events: none;
-    background-color: #f8f9fa;
-    cursor: not-allowed;
+.sidebar-menu li.active a {
+    color: #fff;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .sidebar {
-        display: none;
-    }
-
-    .contenedor-principal {
-        margin-left: 0;
-        padding: 2rem;
-    }
+.sidebar-menu i {
+    width: 2rem;
+    text-align: center;
+    font-size: 1.7rem;
 }
 
-
+/* FORMULARIO */
 .formulario {
     background-color: #f5f5f5;
     padding: 25px;
@@ -413,19 +331,88 @@ footer {
     background-color: #0056b3;
 }
 
-.mensaje-exito {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #c3e6cb;
-    border-radius: 5px;
+/* PAGINACIÓN */
+.paginacion-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.mensaje-error {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #f5c6cb;
-    border-radius: 5px;
+
+.paginacion-info {
+    color: #555;
+    font-size: 16px;
+    text-align: end;
+    width: 100%;
+    max-width: 50rem;
+    box-sizing: border-box;
+    margin-right: 5rem;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.paginacion-container nav {
+    width: auto;
+    background-color: transparent;
+    box-shadow: none;
+    text-align: end;
+    box-sizing: border-box;
+}
+
+.paginacion-list {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    color: #555;
+    font-size: 16px;
+}
+
+.paginacion-item {
+    margin-inline-end: 10px;
+}
+
+.paginacion-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 0 12px;
+    border-radius: 6px;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid #dee2e6;
+    white-space: nowrap;
+}
+
+.paginacion-link:hover {
+    border-color: #eef0f3;
+}
+
+.paginacion-item.active .paginacion-link {
+    background-color: #3498db;
+    border-color: #3498db;
+    color: white;
+}
+
+.paginacion-item.disabled .paginacion-link {
+    color: #adb5bd;
+    pointer-events: none;
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .contenedor-principal {
+        padding: 2rem;
+    }
 }

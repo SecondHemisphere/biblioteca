@@ -1,4 +1,6 @@
+<!-- Encabezado de la página -->
 <header>
+    <!-- Navegación principal -->
     <nav>
         <?php if (isset($_SESSION['user_id'])): ?>
                 <a href="/logout" class="logout-section">
@@ -24,7 +26,7 @@
     </nav>
 </header>
 
-<!-- ALERTA PERSONALIZADA -->
+<!-- Alerta Personalizada -->
 <div id="customAlert" class="modal-alert oculto">
     <div class="contenido-alerta">
         <p id="mensajeAlerta">Mensaje personalizado</p>
@@ -34,6 +36,3 @@
 
 <!-- Script -->
 <script src="/assets/js/alerta.js"></script>
-
-<body>
-    <main>

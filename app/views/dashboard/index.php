@@ -1,4 +1,4 @@
-<main class="contenido-principal">
+
     <div class="cabecera-superior">
         <h1>Bienvenido al Dashboard</h1>
         <p>Resumen general del sistema de biblioteca</p>
@@ -51,4 +51,3 @@
         </div>
         <div class="barra-etiqueta">Total</div>
     </div>
-</main>

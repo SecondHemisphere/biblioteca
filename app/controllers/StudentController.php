@@ -20,17 +20,15 @@ class StudentController {
             'title' => 'Listado de Estudiantes',
             'students' => $students,
             'success_message' => $_SESSION['success_message'] ?? null,
-            'error_message' => $_SESSION['error_message'] ?? null
+            'error_message' => $_SESSION['error_message'] ?? null,
+            'current_page' => 'students'
         ];
 
         unset($_SESSION['success_message']);
         unset($_SESSION['error_message']);
 
-        $current_page = 'students';
-
-        require_once __DIR__ . '/../views/layouts/navbar.php';
-        require_once __DIR__ . '/../views/students/index.php';
-        require_once __DIR__ . '/../views/layouts/sidebar.php';
+        $view = __DIR__ . '/../views/students/index.php';
+        require_once __DIR__ . '/../views/layouts/layout.php';
     }
 
     public function create() {
@@ -41,9 +39,8 @@ class StudentController {
 
         $current_page = 'students';
 
-        require_once __DIR__ . '/../views/layouts/navbar.php';
-        require_once __DIR__ . '/../views/students/create.php';
-        require_once __DIR__ . '/../views/layouts/sidebar.php';
+        $view = __DIR__ . '/../views/students/create.php';
+        require_once __DIR__ . '/../views/layouts/layout.php';
     }
 
     public function store() {

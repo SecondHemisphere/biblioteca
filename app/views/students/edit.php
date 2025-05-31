@@ -7,9 +7,9 @@
     <?php endif; ?>
 
     <?php
-        $form_action = "/students/update/{$data['student']['id']}";
-        $submit_text = "Actualizar";
         $student = $data['student'];
+        $form_action = "/students/update/{$student->id}";
+        $submit_text = "Actualizar";
         $careers = $data['careers'];
         include __DIR__ . '/_form.php';
     ?>

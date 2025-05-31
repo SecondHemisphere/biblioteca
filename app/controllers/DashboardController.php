@@ -22,10 +22,9 @@ class DashboardController {
         ];
 
         $current_page = 'dashboard';
-        
-        require_once __DIR__ . '/../views/layouts/navbar.php';
-        require_once __DIR__ . '/../views/dashboard/index.php';
-        require_once __DIR__ . '/../views/layouts/sidebar.php';
+
+        $view = __DIR__ . '/../views/dashboard/index.php';
+        require_once __DIR__ . '/../views/layouts/layout.php';
     }
     
     private function isLoggedIn() {
