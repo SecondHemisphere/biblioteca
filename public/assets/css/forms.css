@@ -1,0 +1,161 @@
+/* Estilos base del formulario */
+.formulario {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.4rem;
+    border: 0.1rem solid #e0e0e0;
+}
+
+.formulario h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.1rem solid #eee;
+}
+
+/* Grupos de campos */
+.formulario .grupo-campos {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Campos individuales */
+.formulario .campo {
+    flex: 1;
+    min-width: 20rem;
+    margin-bottom: 1rem;
+}
+
+.formulario .campo-ancho {
+    flex: 2;
+}
+
+.formulario .campo label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    color: #34495e;
+}
+
+.formulario .campo input[type="text"],
+.formulario .campo select {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    border: 0.1rem solid #ddd;
+    border-radius: 0.6rem;
+    transition: all 0.3s;
+    background-color: #f9f9f9;
+}
+
+.formulario .campo select {
+    height: 4.6rem;
+    appearance: none;
+}
+
+/* Estilos para los botones */
+.contenedor-botones {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 3rem;
+    gap: 1.5rem;
+}
+
+.boton {
+    padding: 1.2rem 2.4rem;
+    border: none;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.boton-registrar {
+    background-color: #3498db;
+    color: white;
+}
+
+.boton-registrar:hover {
+    background-color: #2980b9;
+    transform: translateY(-0.2rem);
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+}
+
+.boton-cancelar {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.boton-cancelar:hover {
+    background-color: #c0392b;
+    transform: translateY(-0.2rem);
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+}
+
+/* Validación visual */
+.campo input:required,
+.campo select:required {
+    border-left: 0.4rem solid #3498db;
+}
+
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.3rem rgba(52, 152, 219, 0.2);
+    background-color: #fff;
+}
+
+/* Estilos para errores */
+.campo .error {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.campo.error-input input,
+.campo.error-input select {
+    border-color: #e74c3c;
+    background-color: #fef0f0;
+}
+
+.campo.error-input input:focus,
+.campo.error-input select:focus {
+    box-shadow: 0 0 0 0.3rem rgba(231, 76, 60, 0.2);
+}
+
+/* Estilo para el contenedor principal */
+.contenedor-principal {
+    padding: 2rem;
+    max-width: 120rem;
+    margin: 0 auto;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 76.8rem) {
+    .formulario {
+        padding: 1.5rem;
+    }
+    
+    .formulario .campo {
+        min-width: 100%;
+    }
+    
+    .contenedor-botones {
+        flex-direction: column;
+    }
+    
+    .boton {
+        width: 100%;
+    }
+}
