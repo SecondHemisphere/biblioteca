@@ -14,8 +14,8 @@ class AuthController {
             exit;
         }
 
+        $esLogin = true;
         $view = __DIR__ . '/../views/auth/login.php';
-        $hideSidebar = true;
         require_once __DIR__ . '/../views/layouts/layout.php';
     }
     
@@ -24,9 +24,9 @@ class AuthController {
             header('Location: /dashboard');
             exit;
         }
-        
-        $view =  __DIR__ . '/../views/auth/register.php';
-        $hideSidebar = true;
+
+        $esLogin = true;
+        $view = __DIR__ . '/../views/auth/register.php';
         require_once __DIR__ . '/../views/layouts/layout.php';
     }
     

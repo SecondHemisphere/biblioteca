@@ -1,8 +1,56 @@
+/* General */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f7fa;
+    color: #2c3e50;
+}
+
+/* Navbar público */
+.navbar-publico {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-publico .logo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.navbar-publico .nav-links a {
+    color: white;
+    margin-left: 2rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.navbar-publico .nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Contenedor principal */
+.wrapper-autenticacion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 2rem;
+}
+
+/* Formulario de autenticación */
 .contenedor-autenticacion {
     background-color: white;
     border-radius: 0.8rem;
-    box-shadow: 0 0.4rem 0.6rem rgba(0,0,0,0.1);
-    padding: 3rem;
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 40rem;
 }
@@ -15,28 +63,29 @@
 }
 
 .grupo-formulario {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .grupo-formulario label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #333;
-    font-size: 1.6rem;
+    color: #2c3e50;
+    font-size: 1.4rem;
 }
 
 .grupo-formulario input {
     width: 100%;
     padding: 1rem;
-    border: 0.1rem solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 0.4rem;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
 }
 
+/* Botón */
 .boton-principal {
     width: 100%;
     padding: 1.2rem;
-    background-color: #3498db;
+    background-color: #1abc9c;
     color: white;
     border: none;
     border-radius: 0.4rem;
@@ -46,17 +95,57 @@
 }
 
 .boton-principal:hover {
-    background-color: #2980b9;
+    background-color: #16a085;
 }
 
-.texto-secundario {
+/* Footer público */
+.footer-publico {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 2rem;
     text-align: center;
-    margin-top: 2.4rem;
-    color: #666;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    border-top: 0.3rem solid #1abc9c;
+    margin-top: 4rem;
 }
 
-.logo {
-    font-size: 2.4rem;
+.logo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
     font-weight: bold;
+}
+
+.logo-footer i {
+    color: #f39c12;
+    font-size: 2.2rem;
+}
+
+/* Contacto */
+.contacto-rapido {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.contacto-rapido a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contacto-rapido a:hover {
+    color: #f39c12;
+}
+
+.contacto-rapido i {
+    font-size: 1.6rem;
 }

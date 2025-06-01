@@ -57,7 +57,6 @@ if (file_exists($controllerFile)) {
         $controller->$method($_SERVER['REQUEST_METHOD'] === 'POST' ? $_POST : []);
     }
 
-    require_once __DIR__ . '/../app/views/layouts/footer.php';
 } else {
     http_response_code(500);
     die('Controlador no encontrado');
