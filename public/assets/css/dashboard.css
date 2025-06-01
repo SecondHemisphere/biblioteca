@@ -1,15 +1,8 @@
-/* Contenedor principal */
-.contenido-principal {
-    margin-left: 25rem;
-    padding: 1rem;
-    min-height: 100vh;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
 /* Cabecera */
 .cabecera-superior {
     margin-bottom: 1rem;
+    margin-top: 5rem;
 }
 
 .cabecera-superior h1 {

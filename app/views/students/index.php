@@ -13,55 +13,39 @@
     $estudiantes_paginados = array_slice($data['students'], $offset, $por_pagina);
 ?>
 
-<?php
-// Mostrar mensaje de éxito
-if (isset($_GET['success']) && $_GET['success'] == 1) {
-    echo '<div class="alert alert-success">Estudiante creado correctamente</div>';
-}
-
-// Mostrar mensajes de error (si los pasas por URL)
-if (isset($_GET['error'])) {
-    echo '<div class="alert alert-error">Error: ' . htmlspecialchars($_GET['error']) . '</div>';
-}
-?>
-
-<style>
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-}
-.alert-success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-}
-.alert-error {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
-}
-</style>
-
 <div class="contenedor-estudiantes">
-    <h1><?= htmlspecialchars($data['title']) ?></h1>
-    
-    <!-- Mensajes flash -->
-    <?php if ($data['success_message']): ?>
-        <div class="alert alert-success">
-            <?= htmlspecialchars($data['success_message']) ?>
-        </div>
-    <?php endif; ?>
-    
-    <?php if ($data['error_message']): ?>
-        <div class="alert alert-danger">
-            <?= htmlspecialchars($data['error_message']) ?>
+    <!-- Modal personalizado para mensajes flash -->
+    <?php if ($data['success_message'] || $data['error_message']): ?>
+        <div id="customAlert" class="custom-alert" style="display: flex;">
+            <div class="alert-content <?= $data['error_message'] ? 'error' : 'success' ?>">
+                <div class="alert-icon">
+                    <?= $data['error_message'] ? '✕' : '✓' ?>
+                </div>
+                <h3><?= $data['error_message'] ? 'Error' : '¡Correcto!' ?></h3>
+                <p><?= htmlspecialchars($data['error_message'] ?: $data['success_message']) ?></p>
+                <button id="alertConfirmBtn" class="alert-button">
+                    Aceptar
+                </button>
+            </div>
         </div>
     <?php endif; ?>
     
     <hr>
+
+    <div id="confirmModal" class="custom-confirm">
+        <div class="confirm-content">
+            <div class="confirm-icon">!</div>
+            <h3>Confirmar acción</h3>
+            <p>¿Estás seguro de que deseas eliminar este registro?</p>
+            <div class="confirm-actions">
+                <button id="confirmCancel" class="btn-cancel">Cancelar</button>
+                <button id="confirmDelete" class="btn-confirm">Eliminar</button>
+            </div>
+        </div>
+    </div>
     
+    <h1><?= htmlspecialchars($data['title']) ?></h1>
+
     <div class="encabezado">
         <h2>Mostrar | <?= $por_pagina ?> | Entradas</h2>
 
@@ -103,11 +87,11 @@ if (isset($_GET['error'])) {
                         </span>
                     </td>
                     <td class="acciones-container">
-                        <a href="/students/edit/<?= $estudiante->id ?>" class="btn btn-sm btn-warning accion-icon">
+                        <a href="/students/edit/<?= $estudiante->id ?>" class="btn-editar">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <form action="/students/delete/<?= $estudiante->id ?>" method="POST" class="d-inline">
-                            <button type="submit" class="btn btn-sm btn-danger accion-icon" onclick="return confirm('¿Estás seguro?')">
+                        <form action="/students/delete/<?= $estudiante->id ?>" method="POST" class="form-eliminar">
+                            <button type="button" class="btn-eliminar">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>
@@ -140,7 +124,6 @@ if (isset($_GET['error'])) {
             <div class="paginacion-info">
                 Mostrando <span class="highlight"><?= $inicio ?></span> a <span class="highlight"><?= $fin ?></span> de <span class="highlight"><?= $total_registros ?></span> Entradas
             </div>
-
     </div>
 </div>
 

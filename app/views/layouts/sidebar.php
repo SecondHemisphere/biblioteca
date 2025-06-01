@@ -1,9 +1,4 @@
 <aside class="sidebar">
-    <!-- Logo -->
-    <div class="sidebar-logo">
-        <i class="fas fa-book-open"></i>
-        <span>Biblioteca</span>
-    </div>
     <!-- Información del usuario -->
     <div class="user-info">
         <div class="user-avatar">J</div>

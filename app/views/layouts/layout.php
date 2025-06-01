@@ -15,13 +15,6 @@
         <?php endif; ?>
         <!-- Contenido Principal -->
         <main class="contenedor-principal">
-            <!-- Alerta Personalizada -->
-            <div id="customAlert" class="modal-alert oculto">
-                <div class="contenido-alerta">
-                    <p id="mensajeAlerta">Mensaje personalizado</p>
-                    <button onclick="cerrarAlerta()" class="boton-alerta">Cerrar</button>
-                </div>
-            </div>
             <!-- Vista -->
             <?php
             if (isset($view)) {
