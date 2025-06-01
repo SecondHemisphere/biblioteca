@@ -38,7 +38,6 @@ body {
 
 .layout-principal {
     display: flex;
-    min-height: 100vh;
 }
 
 .navegacion-menu {
@@ -152,10 +151,10 @@ footer {
     box-shadow: 0.2rem 0 0.5rem rgba(0, 0, 0, 0.1);
     width: auto;
     height: 100vh;
-    position: sticky;
+    position: fixed;
     top: 0;
     align-self: flex-start;
-    margin-top: 2rem;
+    margin-top: 4rem;
 }
 
 .user-info {
@@ -315,7 +314,8 @@ footer {
     text-align: center;
     line-height: 1;
     width: 100%;
-    position: relative;
+    position: fixed;
+    bottom: 0;
 }
 
 .footer-contenido {

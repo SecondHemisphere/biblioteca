@@ -1,8 +1,12 @@
 
+.contenido-dashboard{
+    margin-top: 5rem;
+    margin-left: 15rem;
+}
+
 /* Cabecera */
 .cabecera-superior {
     margin-bottom: 1rem;
-    margin-top: 5rem;
 }
 
 .cabecera-superior h1 {
