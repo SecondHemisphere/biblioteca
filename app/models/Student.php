@@ -115,34 +115,35 @@ class Student {
      * @return array Resultado de la operación
      */
     public function update($id, $data) {
-        $validation = $this->validateUpdateData($id, $data);
+        $currentStudent = $this->getStudentById($id);
+        if (!$currentStudent) {
+            return ['success' => false, 'errors' => ['general' => 'Estudiante no encontrado']];
+        }
+
+        $validation = $this->validateUpdateData($data, $currentStudent);
         if ($validation !== true) {
             return ['success' => false, 'errors' => $validation];
         }
-        
-        $this->db->query('UPDATE estudiantes SET
-                         codigo = :codigo,
-                         dni = :dni,
-                         nombre = :nombre,
-                         carrera = :carrera,
-                         direccion = :direccion,
-                         telefono = :telefono,
-                         estado = :estado
-                         WHERE id = :id');
-        
+
+        // Construimos dinámicamente el SQL SET
+        $fields = [];
+        foreach ($data as $key => $value) {
+            $fields[] = "$key = :$key";
+        }
+        $sqlSet = implode(', ', $fields);
+
+        $this->db->query("UPDATE estudiantes SET $sqlSet WHERE id = :id");
+
+        // Enlazamos parámetros
+        foreach ($data as $key => $value) {
+            $this->db->bind(":$key", $value);
+        }
         $this->db->bind(':id', $id);
-        $this->db->bind(':codigo', $data['codigo']);
-        $this->db->bind(':dni', $data['dni']);
-        $this->db->bind(':nombre', $data['nombre']);
-        $this->db->bind(':carrera', $data['carrera']);
-        $this->db->bind(':direccion', $data['direccion']);
-        $this->db->bind(':telefono', $data['telefono']);
-        $this->db->bind(':estado', $data['estado']);
-        
+
         $success = $this->db->execute();
         return ['success' => $success];
     }
-    
+
     /**
      * Elimina un estudiante
      * @param int $id ID del estudiante
@@ -262,7 +263,7 @@ class Student {
      */
     public function getStatistics() {
         $this->db->query('
-            SELECT 
+            SELECT
                 carrera,
                 COUNT(*) as total,
                 SUM(CASE WHEN estado = 1 THEN 1 ELSE 0 END) as activos,

@@ -20,6 +20,6 @@
             ?>
         </main>
     </div>
-    <script src="js/forms.js" ></script>
+        <script src="http://localhost/biblioteca/public/assets/js/alerta.js"></script>
 </body>
 </html>

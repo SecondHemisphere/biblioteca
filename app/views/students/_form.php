@@ -80,6 +80,6 @@
     <!-- Botones -->
     <div class="contenedor-botones">
         <a href="/students" class="boton boton-cancelar">Cancelar</a>
-        <button type="submit" class="boton boton-registrar">Registrar Estudiante</button>
+        <button type="submit" class="boton boton-registrar">Guardar</button>
     </div>
 </form>

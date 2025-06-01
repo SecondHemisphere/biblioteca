@@ -35,7 +35,7 @@ class StudentController {
         $data = [
             'title' => 'Registrar Nuevo Estudiante',
             'careers' => ['Ingeniería de sistemas', 'Ingeniería', 'Medicina', 'Derecho', 'Administración'],
-            'student' => new stdClass(),  // Evita error de variable no definida en el formulario
+            'student' => new stdClass(),
             'errors' => [],
             'form_action' => '/students/store',
             'current_page' => 'students'
@@ -104,27 +104,22 @@ class StudentController {
 
     public function update($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // 1. Recoger y limpiar datos
             $dataInput = [
-                'codigo'    => trim($_POST['codigo'] ?? ''),
-                'dni'       => trim($_POST['dni'] ?? ''),
-                'nombre'    => trim($_POST['nombre'] ?? ''),
-                'carrera'   => trim($_POST['carrera'] ?? ''),
-                'direccion' => trim($_POST['direccion'] ?? ''),
-                'telefono'  => trim($_POST['telefono'] ?? ''),
-                'estado'    => (int) ($_POST['estado'] ?? 0)
+                'codigo'    => trim($_POST['codigo']),
+                'dni'       => trim($_POST['dni']),
+                'nombre'    => trim($_POST['nombre']),
+                'carrera'   => trim($_POST['carrera']),
+                'direccion' => trim($_POST['direccion']),
+                'telefono'  => trim($_POST['telefono']),
+                'estado'    => (int) trim($_POST['estado'])
             ];
-
-            // 2. Depuración (puedes eliminar esto después)
-            error_log("Datos recibidos para actualización: " . print_r($dataInput, true));
-
-            // 3. Validación
-            $validation = $this->studentModel->validateUpdateData($id, $dataInput);
+            
+            $currentStudent = $this->studentModel->getStudentById($id);
+            $validation = $this->studentModel->validateUpdateData($dataInput, $currentStudent);
 
             if ($validation === true) {
-                // 4. Si la validación es exitosa
                 $result = $this->studentModel->update($id, $dataInput);
-                
+
                 if ($result) {
                     $_SESSION['success_message'] = 'Estudiante actualizado correctamente';
                 } else {
@@ -134,12 +129,9 @@ class StudentController {
                 header('Location: /students');
                 exit;
             } else {
-                // 5. Si hay errores de validación
-                error_log("Errores de validación: " . print_r($validation, true));
-                
-                // Cargar los datos originales para mantener consistencia
+
                 $originalStudent = $this->studentModel->getStudentById($id);
-                
+
                 $data = [
                     'title' => 'Editar Estudiante',
                     'student' => (object) array_merge((array) $originalStudent, $dataInput),
