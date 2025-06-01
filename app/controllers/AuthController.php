@@ -14,9 +14,9 @@ class AuthController {
             exit;
         }
 
-        require_once __DIR__ . '/../views/layouts/navbar.php';
-        require_once __DIR__ . '/../views/auth/login.php';
-        require_once __DIR__ . '/../views/layouts/footer.php';
+        $view = __DIR__ . '/../views/auth/login.php';
+        $hideSidebar = true;
+        require_once __DIR__ . '/../views/layouts/layout.php';
     }
     
     public function showRegister() {
@@ -25,9 +25,9 @@ class AuthController {
             exit;
         }
         
-        require_once __DIR__ . '/../views/layouts/navbar.php';
-        require_once __DIR__ . '/../views/auth/register.php';
-        require_once __DIR__ . '/../views/layouts/footer.php';
+        $view =  __DIR__ . '/../views/auth/register.php';
+        $hideSidebar = true;
+        require_once __DIR__ . '/../views/layouts/layout.php';
     }
     
     public function login($data) {

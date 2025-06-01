@@ -1,9 +1,9 @@
 <aside class="sidebar">
+    <!-- Logo -->
     <div class="sidebar-logo">
         <i class="fas fa-book-open"></i>
         <span>Biblioteca</span>
     </div>
-
     <!-- Información del usuario -->
     <div class="user-info">
         <div class="user-avatar">J</div>
@@ -12,7 +12,7 @@
             <div class="user-role">Administrador</div>
         </div>
     </div>
-
+    <!-- Menú -->
     <nav class="sidebar-menu">
         <ul>
             <!-- Dashboard -->
@@ -22,7 +22,6 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            
             <!-- Préstamos -->
             <li class="<?php echo ($current_page == 'prestamos') ? 'active' : '' ?>">
                 <a href="<?php echo URL_ROOT; ?>/prestamos">
@@ -30,7 +29,6 @@
                     <span>Préstamos</span>
                 </a>
             </li>
-            
             <!-- Estudiantes -->
             <li class="<?php echo ($current_page == 'students') ? 'active' : '' ?>">
                 <a href="/students">
@@ -38,7 +36,6 @@
                     <span>Estudiantes</span>
                 </a>
             </li>
-            
             <!-- Materias -->
             <li class="<?php echo ($current_page == 'materias') ? 'active' : '' ?>">
                 <a href="<?php echo URL_ROOT; ?>/materias">
@@ -46,7 +43,6 @@
                     <span>Materias</span>
                 </a>
             </li>
-            
             <!-- Libros -->
             <li class="<?php echo ($current_page == 'libros') ? 'active' : '' ?>">
                 <a href="<?php echo URL_ROOT; ?>/libros">
@@ -54,7 +50,6 @@
                     <span>Libros</span>
                 </a>
             </li>
-            
             <!-- Autores -->
             <li class="<?php echo ($current_page == 'autores') ? 'active' : '' ?>">
                 <a href="<?php echo URL_ROOT; ?>/autores">
@@ -62,7 +57,6 @@
                     <span>Autores</span>
                 </a>
             </li>
-            
             <!-- Editoriales -->
             <li class="<?php echo ($current_page == 'editoriales') ? 'active' : '' ?>">
                 <a href="<?php echo URL_ROOT; ?>/editoriales">
@@ -70,7 +64,6 @@
                     <span>Editoriales</span>
                 </a>
             </li>
-            
             <!-- Administración -->
             <li class="<?php echo ($current_page == 'administracion') ? 'active' : '' ?>">
                 <a href="<?php echo URL_ROOT; ?>/administracion">
@@ -78,7 +71,6 @@
                     <span>Administración</span>
                 </a>
             </li>
-            
             <!-- Reportes -->
             <li class="<?php echo ($current_page == 'reportes') ? 'active' : '' ?>">
                 <a href="<?php echo URL_ROOT; ?>/reportes">

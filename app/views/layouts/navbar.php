@@ -1,9 +1,9 @@
-<!-- Encabezado de la página -->
+<!-- Encabezado-->
 <header>
     <!-- Navegación principal -->
-    <nav>
+    <nav class="navegacion-menu">
         <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="/logout" class="logout-section">
+                <a href="/logout" class="logout-item">
                     Cerrar Sesión
                     <i class="fas fa-sign-out-alt"></i>
                 </a>
@@ -25,14 +25,3 @@
         <?php endif; ?>
     </nav>
 </header>
-
-<!-- Alerta Personalizada -->
-<div id="customAlert" class="modal-alert oculto">
-    <div class="contenido-alerta">
-        <p id="mensajeAlerta">Mensaje personalizado</p>
-        <button onclick="cerrarAlerta()" class="boton-alerta">Cerrar</button>
-    </div>
-</div>
-
-<!-- Script -->
-<script src="/assets/js/alerta.js"></script>

@@ -32,38 +32,55 @@ body {
     min-height: 100vh;
 }
 
-nav {
+.navegacion-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 1000;
     background-color: var(--color-primario);
-    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
 }
 
-nav a {
+.navegacion-menu a {
     color: var(--color-texto);
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     text-decoration: none;
     margin-left: 5rem;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
-nav a:last-child {
+.navegacion-menu a:last-child {
     margin-left: 0;
 }
 
-nav a i {
+.navegacion-menu a i {
     margin-right: 0.5rem;
 }
 
-nav a:hover {
+.navegacion-menu a:hover {
     color: var(--color-hover);
     text-decoration: underline;
 }
 
+.navegacion-menu .logout-item {
+    background-color: #e74c3c;
+    padding: 1.5rem;
+}
+
+.navegacion-menu .logout-item:hover {
+    background-color: #e74c3c !important;
+    color: white !important;
+}
+
 .contenedor-principal {
     flex: 1;
-    padding: 3rem;
+    margin-top: 14rem;
+    padding-top: 14rem;
 }
 
 .enlace {
@@ -163,8 +180,11 @@ footer {
     flex-direction: column;
     box-shadow: 0.2rem 0 0.5rem rgba(0, 0, 0, 0.1);
     width: auto;
-    height: auto;
-    position: relative;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    margin-top: 5rem;
 }
 
 .sidebar-logo {
@@ -335,6 +355,47 @@ footer {
     cursor: not-allowed;
 }
 
+footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    line-height: 1;
+    width: 100%;
+    position: relative;
+}
+
+.footer-contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: var(--color-texto);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--color-hover); /* #16a085 */
+    text-decoration: underline;
+}
+
+.footer-copyright {
+    font-size: 1.4rem;
+    opacity: 0.8;
+}
+
+/* Responsive para móviles */
 @media (max-width: 768px) {
     .sidebar {
         display: none;
@@ -342,5 +403,10 @@ footer {
 
     .contenedor-principal {
         padding: 2rem;
+    }
+
+    .footer-contenido {
+        flex-direction: column;
+        gap: 1.5rem;
     }
 }

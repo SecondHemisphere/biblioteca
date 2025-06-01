@@ -1,5 +1,4 @@
-<!-- Contenedor principal del formulario de autenticación -->
-<div class="contenedor-principal">
+
     <div class="contenedor-autenticacion">
         <h2 class="titulo-autenticacion">Crear Cuenta</h2>
 
@@ -56,7 +55,6 @@
             </p>
         </div>
     </div>
-</div>
 
 <!-- Script -->
 <script src="/assets/js/auth.js"></script>

@@ -1,6 +1,4 @@
-<!-- Contenedor principal del formulario de autenticación -->
-<div class="contenedor-principal">
-    <div class="contenedor-autenticacion">
+   <div class="contenedor-autenticacion">
         <h2 class="titulo-autenticacion">Iniciar Sesión</h2>
 
         <!-- Mensaje de error (si existe) -->
@@ -41,7 +39,6 @@
             <a href="/register" class="enlace">Regístrate aquí</a>
         </p>
     </div>
-</div>
 
 <!-- Script de autenticación -->
 <script src="/assets/js/auth.js"></script>
