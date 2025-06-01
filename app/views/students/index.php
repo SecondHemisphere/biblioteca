@@ -30,8 +30,6 @@
         </div>
     <?php endif; ?>
     
-    <hr>
-
     <div id="confirmModal" class="custom-confirm">
         <div class="confirm-content">
             <div class="confirm-icon">!</div>
@@ -46,9 +44,10 @@
     
     <h1><?= htmlspecialchars($data['title']) ?></h1>
 
+    <hr>
+
     <div class="encabezado">
         <h2>Mostrar | <?= $por_pagina ?> | Entradas</h2>
-
         <div class="nuevo-estudiante">
             <a type="button" class="btn btn-primary" href="/students/create">
                 <i class="fas fa-plus"></i> Nuevo Estudiante

@@ -58,7 +58,7 @@ body {
     color: var(--color-texto);
     font-size: 1.7rem;
     text-decoration: none;
-    margin-left: 5rem;
+    margin-left: 4rem;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
@@ -154,7 +154,8 @@ footer {
     position: fixed;
     top: 0;
     align-self: flex-start;
-    margin-top: 4rem;
+    margin-top: 5rem;
+    padding: auto;
 }
 
 .user-info {
@@ -199,11 +200,12 @@ footer {
 
 .sidebar-menu ul {
     list-style: none;
-    padding: 1rem;
+    padding: 0rem;
 }
 
 .sidebar-menu li {
     transition: background-color 0.2s;
+    padding: 0rem 1rem;
 }
 
 .sidebar-menu li a {
@@ -581,3 +583,4 @@ footer {
 .btn-editar:hover {
     background: #69adda;
 }
+
