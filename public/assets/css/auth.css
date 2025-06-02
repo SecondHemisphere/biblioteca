@@ -78,56 +78,6 @@
     background-color: var(--color-boton-hover);
 }
 
-/* Footer público */
-.footer-publico {
-    background-color: var(--color-footer-fondo);
-    color: var(--color-footer-texto);
-    padding: 2rem;
-    text-align: center;
-    font-size: 1.5rem;
-}
-
-.logo-footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    font-size: 1.8rem;
-    font-weight: bold;
-}
-
-.logo-footer i {
-    color: var(--color-footer-icono);
-    font-size: 2rem;
-}
-
-/* Contacto */
-.contacto-rapido {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-}
-
-.contacto-rapido a {
-    color: var(--color-footer-enlace);
-    text-decoration: none;
-    transition: color 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.contacto-rapido a:hover {
-    color: var(--color-hover);
-}
-
-.contacto-rapido i {
-    font-size: 1.5rem;
-}
-
 /* Navbar principal del sistema */
 .navbar-sistema {
     background-color: var(--color-fondo-navbar-publico);
@@ -295,4 +245,97 @@
 
 .auth-enlace:hover {
     text-decoration: underline;
+}
+
+.footer-sistema {
+    background-color: var(--color-footer-fondo);
+    color: var(--color-footer-texto);
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.footer-sistema-contenido {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-sistema-derechos {
+    font-size: 1.5rem;
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+}
+
+.footer-sistema-util {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 1.5rem;
+    opacity: 0.9;
+}
+
+.footer-sistema-util i {
+    margin-right: 5px;
+    color: #f1c40f;
+}
+
+.footer-sistema-util a {
+    color: #ecf0f1;
+    text-decoration: none;
+}
+
+.footer-sistema-util a:hover {
+    text-decoration: underline;
+}
+
+/* Footer público */
+.footer-publico {
+    background-color: var(--color-footer-fondo);
+    color: var(--color-footer-texto);
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.logo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.logo-footer i {
+    color: var(--color-footer-icono);
+    font-size: 2rem;
+}
+
+/* Contacto */
+.contacto-rapido {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.contacto-rapido a {
+    color: var(--color-footer-enlace);
+    text-decoration: none;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contacto-rapido a:hover {
+    color: var(--color-hover);
+}
+
+.contacto-rapido i {
+    font-size: 1.5rem;
 }

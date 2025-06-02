@@ -51,8 +51,6 @@ body {
 .layout-principal {
     display: flex;
     flex: 1;
-    margin-top: 5rem;
-    min-height: 100vh;
 }
 
 /* Sidebar */
@@ -63,11 +61,7 @@ body {
     flex-direction: column;
     box-shadow: 0.2rem 0 0.5rem rgba(0, 0, 0, 0.1);
     width: 25rem;
-    height: calc(100vh - 5rem); /* Altura total menos navbar */
-    position: fixed;
-    top: 5rem;
-    left: 0;
-    overflow-y: auto;
+    height: 100%;
 }
 
 .user-info {
@@ -151,9 +145,8 @@ body {
 .contenedor-principal {
     flex: 1;
     background-color: #ffffff;
-    margin-left: 25rem; /* Igual al ancho del sidebar */
     padding: 2rem;
-    min-height: calc(100vh - 5rem - 10rem); /* Altura menos navbar y footer */
+    min-height: 100vh;
 }
 
 /* Elementos comunes */
@@ -269,7 +262,6 @@ body {
     border-radius: 0.4rem;
     cursor: pointer;
     transition: background 0.2s;
-    margin-top: 1.3rem;
     font-size: 1.6rem;
 }
 

@@ -43,8 +43,8 @@
     </form>
 
     <!-- Enlace para usuarios que ya tienen cuenta -->
-            <p class="auth-texto-secundario">
-                ¿Ya tienes una cuenta?
+    <p class="auth-texto-secundario">
+        ¿Ya tienes una cuenta?
         <a href="/login" class="auth-enlace">Inicia Sesión</a>
     </p>
 </div>

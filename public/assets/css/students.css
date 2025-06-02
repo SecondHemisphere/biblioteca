@@ -1,13 +1,9 @@
 /* Estilos específicos para la sección de estudiantes */
 .contenedor-estudiantes {
-    padding: 1rem 2rem 1rem 3rem;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
     background-color: #ffffff;
-    margin-top: 5rem;
-    margin-left: 20rem;
-    margin-bottom: 3rem;
 }
 
 .contenedor-estudiantes h1 {
