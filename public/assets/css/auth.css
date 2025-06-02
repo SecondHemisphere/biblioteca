@@ -1,91 +1,71 @@
-/* General */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+    --color-fondo-navbar-publico: #2c3e50;    /* Azul grisáceo profundo */
+    --color-auth-icono: #f39c12;              /* Naranja dorado (íconos) */
+    --color-auth-texto: #ecf0f1;              /* Blanco nieve (texto navbar) */
+
+    --color-fondo-formulario: #ffffff;        /* Blanco (formulario) */
+    --color-borde-input: #bdc3c7;             /* Gris claro */
+    --color-texto-principal: #2c3e50;         /* Azul grisáceo oscuro (texto) */
+    --color-boton-principal: #2980b9;         /* Azul fuerte (botón) */
+
+    --color-footer-fondo: #2c3e50;            /* Azul grisáceo (footer) */
+    --color-footer-texto: #ecf0f1;            /* Blanco nieve (texto footer) */
+    --color-footer-icono: #f39c12;            /* Naranja dorado (íconos) */
+    --color-footer-enlace: #bdc3c7;           /* Gris claro (enlaces) */
 }
 
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f5f7fa;
-    color: #2c3e50;
+.contenedor-principal-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    background-color: white;
 }
 
-/* Navbar público */
+/* Estilos generales del navbar público */
 .navbar-publico {
-    background-color: #2c3e50;
-    color: white;
+    background-color: var(--color-fondo-navbar-publico);
+    color: var(--color-auth-texto);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+/* Logo e ícono del libro */
 .navbar-publico .logo {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
+.navbar-publico .logo i {
+    color: var(--color-auth-icono);
+    padding-right: 1rem;
+}
+
+/* Enlaces de navegación */
 .navbar-publico .nav-links a {
-    color: white;
-    margin-left: 2rem;
+    color: var(--color-auth-texto);
+    margin: 0rem 5rem 0rem 5rem;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.8rem;
+    transition: color 0.3s;
 }
 
 .navbar-publico .nav-links a:hover {
+    color: var(--color-hover);
     text-decoration: underline;
-}
-
-/* Contenedor principal */
-.wrapper-autenticacion {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh;
-    padding: 2rem;
-}
-
-/* Formulario de autenticación */
-.contenedor-autenticacion {
-    background-color: white;
-    border-radius: 0.8rem;
-    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 40rem;
-}
-
-.titulo-autenticacion {
-    color: #2c3e50;
-    margin-bottom: 2.4rem;
-    text-align: center;
-    font-size: 2.4rem;
-}
-
-.grupo-formulario {
-    margin-bottom: 1.5rem;
-}
-
-.grupo-formulario label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #2c3e50;
-    font-size: 1.4rem;
-}
-
-.grupo-formulario input {
-    width: 100%;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.4rem;
-    font-size: 1.4rem;
 }
 
 /* Botón */
 .boton-principal {
     width: 100%;
     padding: 1.2rem;
-    background-color: #1abc9c;
+    background-color: var(--color-boton-principal);
     color: white;
     border: none;
     border-radius: 0.4rem;
@@ -95,18 +75,16 @@ body {
 }
 
 .boton-principal:hover {
-    background-color: #16a085;
+    background-color: var(--color-boton-hover);
 }
 
 /* Footer público */
 .footer-publico {
-    background-color: #2c3e50;
-    color: #ecf0f1;
+    background-color: var(--color-footer-fondo);
+    color: var(--color-footer-texto);
     padding: 2rem;
     text-align: center;
-    font-size: 1.4rem;
-    border-top: 0.3rem solid #1abc9c;
-    margin-top: 4rem;
+    font-size: 1.5rem;
 }
 
 .logo-footer {
@@ -120,8 +98,8 @@ body {
 }
 
 .logo-footer i {
-    color: #f39c12;
-    font-size: 2.2rem;
+    color: var(--color-footer-icono);
+    font-size: 2rem;
 }
 
 /* Contacto */
@@ -134,7 +112,7 @@ body {
 }
 
 .contacto-rapido a {
-    color: #bdc3c7;
+    color: var(--color-footer-enlace);
     text-decoration: none;
     transition: color 0.3s;
     display: flex;
@@ -143,9 +121,178 @@ body {
 }
 
 .contacto-rapido a:hover {
-    color: #f39c12;
+    color: var(--color-hover);
 }
 
 .contacto-rapido i {
+    font-size: 1.5rem;
+}
+
+/* Navbar principal del sistema */
+.navbar-sistema {
+    background-color: var(--color-fondo-navbar-publico);
+    color: var(--color-auth-texto);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Logo */
+.navbar-sistema .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-auth-texto);
+    padding: 0.5rem;
+}
+
+.navbar-sistema .logo i {
+    color: var(--color-auth-icono);
+    font-size: 2rem;
+    padding-right: 1rem;
+}
+
+/* Enlaces de navegación */
+.navbar-sistema .nav-links {
+    display: flex;
+    gap: 5rem;
+    flex-wrap: wrap;
+}
+
+.navbar-sistema .nav-links a {
+    color: var(--color-auth-texto);
+    text-decoration: none;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-sistema .nav-links a:hover {
+    color: var(--color-hover);
+    text-decoration: underline;
+}
+
+/* Íconos de enlaces */
+.navbar-sistema .nav-links i {
     font-size: 1.6rem;
+    color: var(--color-auth-icono);
+    transition: color 0.3s ease;
+    margin-bottom: 0.2rem;
+}
+
+.navbar-sistema .nav-links a:hover i {
+    color: var(--color-hover);
+}
+
+/* Cerrar sesión especial */
+.navbar-sistema .logout-item {
+    font-weight: bold;
+    color: var(--color-auth-texto);
+}
+
+.navbar-sistema .logout-item:hover {
+    color: #e53935; /* Rojo suave */
+}
+
+.contenedor-autenticacion {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.auth-contenedor {
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-size: 1.5rem;
+    width: 35%;
+}
+
+.auth-titulo {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.auth-mensaje {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.auth-error {
+    background-color: #ffe0e0;
+    color: #c00;
+}
+
+.auth-exito {
+    background-color: #e0ffe0;
+    color: #060;
+}
+
+.auth-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.auth-grupo label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.auth-grupo input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.auth-boton {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.auth-boton-principal {
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.auth-boton-principal:hover {
+    background-color: #0056b3;
+}
+
+.auth-texto-secundario {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.auth-enlace {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.4rem;
+}
+
+.auth-enlace:hover {
+    text-decoration: underline;
 }

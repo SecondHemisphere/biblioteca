@@ -1,13 +1,13 @@
 <!-- Encabezado-->
 <header>
-    <!-- Navegación principal -->
-    <nav class="navegacion-menu">
+    <!-- Navbar Público -->
+    <nav class="navbar-sistema">
         <!-- Logo -->
         <div class="logo">
             <i class="fas fa-book-open"></i>
-            <span>Biblioteca</span>
+            <span>Biblioteca Virtual</span>
         </div>
-        <?php if (isset($_SESSION['user_id'])): ?>
+        <div class="nav-links">
             <a href="/dashboard">
                 <i class="fas fa-user"></i>
                 Mi Cuenta
@@ -24,9 +24,6 @@
                 Cerrar Sesión
                 <i class="fas fa-sign-out-alt"></i>
             </a>
-        <?php else: ?>
-            <a href="/login">Iniciar Sesión</a>
-            <a href="/register">Registrarse</a>
-        <?php endif; ?>
+        </div>
     </nav>
 </header>

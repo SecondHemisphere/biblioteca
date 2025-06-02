@@ -18,6 +18,19 @@
     --color-alerta-fondo: rgba(0,0,0,0.4);
 }
 
+/* General */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f7fa;
+    color: #2c3e50;
+}
+
 html {
     font-size: 62.5%; /* 1rem = 10px */
     height: 100%;
@@ -38,67 +51,8 @@ body {
 .layout-principal {
     display: flex;
     flex: 1;
-    margin-top: 5rem; /* Para el navbar fijo */
-    min-height: calc(100vh - 5rem); /* Altura total menos navbar */
-}
-
-/* Navbar */
-.navegacion-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5rem;
-    z-index: 1000;
-    background-color: var(--color-primario);
-    box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.navegacion-menu a {
-    color: var(--color-texto);
-    font-size: 1.7rem;
-    text-decoration: none;
-    margin-left: 4rem;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
-}
-
-.navegacion-menu a i {
-    margin-right: 0.5rem;
-}
-
-.navegacion-menu a:hover {
-    color: var(--color-hover);
-    text-decoration: underline;
-}
-
-.navegacion-menu .logout-item {
-    background-color: #e74c3c;
-    padding: 1.5rem;
-}
-
-.navegacion-menu .logout-item:hover {
-    background-color: #e74c3c !important;
-    color: white !important;
-}
-
-.navegacion-menu .logo {
-    margin-right: auto;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    font-size: 1.8rem;
-    font-weight: bold;
-    padding: 1.2rem 3.6rem;
-    color: #ecf0f1;
-    background-color: #000000;
-}
-
-.navegacion-menu .logo i {
-    font-size: 2.2rem;
-    color: #f1c40f;
+    margin-top: 5rem;
+    min-height: 100vh;
 }
 
 /* Sidebar */
@@ -519,15 +473,6 @@ body {
     .contenedor-principal {
         margin-left: 0;
         padding: 2rem;
-    }
-    
-    .navegacion-menu a {
-        margin-left: 2rem;
-        font-size: 1.5rem;
-    }
-    
-    .navegacion-menu .logo {
-        padding: 1.2rem 1.8rem;
     }
 }
 
