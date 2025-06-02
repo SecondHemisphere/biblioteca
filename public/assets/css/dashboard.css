@@ -5,12 +5,13 @@
 
 /* Cabecera */
 .cabecera-superior {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 .cabecera-superior h1 {
     font-size: 2.5rem;
     color: #2c3e50;
+    margin-bottom: 1rem;
 }
 
 .cabecera-superior p {
@@ -22,12 +23,12 @@
 .estadisticas-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1.5rem;
+    gap: 1rem;
     margin-bottom: 2rem;
 }
 
 .tarjeta-estadistica {
-    background-color: white;
+    background-color: #f9f9f9;
     border-radius: 0.8rem;
     padding: 1.5rem 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -83,7 +84,7 @@
 
 /* Gráfico de libros disponibles */
 .grafico-container {
-    background-color: white;
+    background-color: #E6F2FF;
     border-radius: 0.8rem;
     padding: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
