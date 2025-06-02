@@ -254,37 +254,6 @@ body {
     cursor: not-allowed;
 }
 
-/* Botones */
-.btn-eliminar {
-    background: #e74c3c;
-    color: white;
-    border: none;
-    padding: 0.7rem;
-    border-radius: 0.4rem;
-    cursor: pointer;
-    transition: background 0.2s;
-    font-size: 1.6rem;
-}
-
-.btn-eliminar:hover {
-    background: #c0392b;
-}
-
-.btn-editar {
-    background: #3498db;
-    color: white;
-    border: none;
-    padding: 0.7rem;
-    border-radius: 0.4rem;
-    cursor: pointer;
-    transition: background 0.2s;
-    font-size: 1.6rem;
-}
-
-.btn-editar:hover {
-    background: #2980b9;
-}
-
 /* Modales */
 .custom-alert {
     position: fixed;

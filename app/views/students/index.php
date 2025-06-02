@@ -86,11 +86,11 @@
                         </span>
                     </td>
                     <td class="acciones-container">
-                        <a href="/students/edit/<?= $estudiante->id ?>" class="btn-editar">
+                        <a href="/students/edit/<?= $estudiante->id ?>" class="btn-accion btn-editar">
                             <i class="fas fa-edit"></i>
                         </a>
                         <form action="/students/delete/<?= $estudiante->id ?>" method="POST" class="form-eliminar">
-                            <button type="button" class="btn-eliminar">
+                            <button type="button" class="btn-accion btn-eliminar">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>

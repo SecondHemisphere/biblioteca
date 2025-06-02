@@ -48,7 +48,7 @@
 .contenedor-tabla-estudiantes th,
 .contenedor-tabla-estudiantes td {
     white-space: nowrap;
-    border-bottom: 0.1rem solid #e0e0e0;
+    border: 0.1rem solid #e0e0e0;
 }
 
 .contenedor-tabla-estudiantes th {
@@ -73,29 +73,42 @@
     background-color: #f8f9fa;
 }
 
-/* Estilos para los estados */
-.contenedor-tabla-estudiantes td:last-child {
-    font-weight: bold;
-    color: #27ae60;
-}
-
-.contenedor-tabla-estudiantes td[data-estado="0"] {
-    color: #e74c3c;
-}
-
-.acciones-container {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
 .accion-icon {
-  font-size: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
+  font-size: 2.4rem;
+}
+.acciones-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+.btn-accion {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.btn-editar {
+    background-color: #3498db;
+}
+
+.btn-eliminar {
+    background-color: #e74c3c;
+}
+
+.form-eliminar {
+    margin: 0;
 }
 
 .nuevo-estudiante {
