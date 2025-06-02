@@ -184,6 +184,7 @@ body {
     justify-content: space-between;
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 1rem;
 }
 
 .paginacion-info {

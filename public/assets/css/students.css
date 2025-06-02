@@ -8,9 +8,7 @@
 
 .contenedor-estudiantes h1 {
     color: #2c3e50;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+    font-size: 2.1rem;
     text-align: center;
 }
 
@@ -18,7 +16,7 @@
     border: 0;
     height: 0.1rem;
     background-color: #e0e0e0;
-    margin: 1rem 0;
+    margin: 0.5rem 0rem 1rem 0rem;
 }
 
 .encabezado {
@@ -29,7 +27,7 @@
 
 .encabezado h2 {
     color: #34495e;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     margin-bottom: 0.5rem;
 }
 
@@ -50,20 +48,19 @@
 .contenedor-tabla-estudiantes th,
 .contenedor-tabla-estudiantes td {
     white-space: nowrap;
-    padding: 1.2rem 1.5rem;
     border-bottom: 0.1rem solid #e0e0e0;
 }
 
 .contenedor-tabla-estudiantes th {
     background-color: #3498db;
     color: white;
-    padding: 1.2rem 1.5rem;
+    padding: 0.8rem 0.5rem;
     text-align: left;
     font-weight: bold;
 }
 
 .contenedor-tabla-estudiantes td {
-    padding: 1.2rem 1.5rem;
+    padding: 0.5rem;
     border-bottom: 0.1rem solid #e0e0e0;
     color: #333;
 }
@@ -109,7 +106,7 @@
 .nuevo-estudiante .btn {
     display: inline-flex;
     align-items: center;
-    padding: 1rem 1.5rem;
+    padding: 0.8rem;
     border-radius: 0.4rem;
     text-decoration: none;
     font-weight: 500;
