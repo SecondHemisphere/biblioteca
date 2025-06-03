@@ -1,19 +1,28 @@
 <?php
 // Configuración de la paginación
-$total_registros = count($data['students']);
-$por_pagina = 10;
-$pagina_actual = isset($_GET['pagina']) ? max(1, (int)$_GET['pagina']) : 1;
-$total_paginas = ceil($total_registros / $por_pagina);
 
-$offset = ($pagina_actual - 1) * $por_pagina;
-$inicio = $offset + 1;
-$fin = min($total_registros, $pagina_actual * $por_pagina);
+// Opciones de registros por página para el selector del usuario.
+$opciones_por_pagina = [5, 10, 25, 50, 100];
 
-// Subconjunto de estudiantes para mostrar en la página actual
+// Obtiene 'por_pagina' de la URL; si no es válido, usa 10 por defecto.
+$por_pagina = isset($_GET['por_pagina']) && in_array((int)$_GET['por_pagina'], $opciones_por_pagina) ? (int)$_GET['por_pagina'] : 10;
+
+$total_registros = count($data['students']); // Total de registros.
+$pagina_actual = isset($_GET['pagina']) ? max(1, (int)$_GET['pagina']) : 1; // Página actual.
+$total_paginas = ceil($total_registros / $por_pagina); // Total de páginas.
+
+$offset = ($pagina_actual - 1) * $por_pagina; // Desplazamiento para la consulta.
+$inicio = $offset + 1; // Primer registro visible.
+$fin = min($total_registros, $pagina_actual * $por_pagina); // Último registro visible.
+
+// Subconjunto de estudiantes para la página actual.
 $estudiantes_paginados = array_slice($data['students'], $offset, $por_pagina);
 
-// Ruta base para los enlaces de paginación
+// Ruta base para los enlaces de paginación.
+// Asegúrate de que los enlaces de paginación conserven 'por_pagina'.
 $base_url = '/students';
+// Si el componente de paginación maneja parámetros, no modifiques $base_url aquí.
+
 ?>
 
 <div class="contenedor-listados">
