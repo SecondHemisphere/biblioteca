@@ -21,7 +21,7 @@ $texto_boton = $texto_boton ?? 'Nuevo';
 
 <div class="encabezado">
     <h2><?= htmlspecialchars($titulo) ?> | <?= $cantidad ?> | Entradas</h2>
-    <div class="nuevo-estudiante">
+    <div class="nuevo-registro">
         <a type="button" class="btn btn-primary" href="<?= htmlspecialchars($ruta_crear) ?>">
             <i class="fas fa-plus"></i> <?= htmlspecialchars($texto_boton) ?>
         </a>

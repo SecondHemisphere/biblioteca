@@ -16,7 +16,7 @@ $materias_paginadas = array_slice($data['subjects'], $offset, $por_pagina);
 $base_url = '/subjects';
 ?>
 
-<div class="contenedor-estudiantes">
+<div class="contenedor-listados">
 
     <!-- Alerta de éxito o error -->
     <?php
@@ -43,7 +43,7 @@ $base_url = '/subjects';
     ?>
 
     <!-- Tabla de materias -->
-    <div class="contenedor-tabla-estudiantes">
+    <div class="contenedor-tabla">
         <?php
         $columnas = [
             ['campo' => 'id', 'titulo' => 'ID'],

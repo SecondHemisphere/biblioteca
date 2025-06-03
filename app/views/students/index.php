@@ -16,7 +16,7 @@ $estudiantes_paginados = array_slice($data['students'], $offset, $por_pagina);
 $base_url = '/students';
 ?>
 
-<div class="contenedor-estudiantes">
+<div class="contenedor-listados">
 
     <!-- Alerta de éxito o error -->
     <?php
@@ -43,7 +43,7 @@ $base_url = '/students';
     ?>
 
     <!-- Tabla de estudiantes -->
-    <div class="contenedor-tabla-estudiantes">
+    <div class="contenedor-tabla">
         <?php
         $columnas = [
             ['campo' => 'id', 'titulo' => 'ID'],

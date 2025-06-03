@@ -438,3 +438,150 @@ body {
     }
 }
 
+
+
+/* Estilos específicos para los listados */
+.contenedor-listados {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.contenedor-listados h1 {
+    color: #2c3e50;
+    font-size: 2.1rem;
+    text-align: center;
+}
+
+.contenedor-listados hr {
+    border: 0;
+    height: 0.1rem;
+    background-color: #e0e0e0;
+    margin: 0.5rem 0rem 1rem 0rem;
+}
+
+.contenedor-listados .encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contenedor-listados .encabezado h2 {
+    color: #34495e;
+    font-size: 1.7rem;
+    margin-bottom: 0.5rem;
+}
+
+.contenedor-tabla {
+    overflow-x: auto;
+    margin: 0.5rem 0;
+}
+
+.contenedor-tabla table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    margin-bottom: 0rem;
+}
+
+.contenedor-tabla th,
+.contenedor-tabla td {
+    white-space: nowrap;
+    border: 0.1rem solid #e0e0e0;
+}
+
+.contenedor-tabla th {
+    background-color: #3498db;
+    color: white;
+    padding: 0.8rem 0.5rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+.contenedor-tabla td {
+    padding: 0.5rem;
+    border-bottom: 0.1rem solid #e0e0e0;
+    color: #333;
+}
+
+.contenedor-tabla tr:hover {
+    background-color: #f5f9fc;
+}
+
+.contenedor-tabla tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.accion-icon {
+  font-size: 2.4rem;
+}
+.acciones-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+.btn-accion {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.btn-editar {
+    background-color: #3498db;
+}
+
+.btn-eliminar {
+    background-color: #e74c3c;
+}
+
+.form-eliminar {
+    margin: 0;
+}
+
+.nuevo-registro {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nuevo-registro .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem;
+    border-radius: 0.4rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    gap: 8px;
+    font-size: 1.4rem;
+}
+
+.nuevo-registro .btn-primary {
+    background-color: #3498db;
+    color: white;
+    border: 1px solid #2980b9;
+}
+
+.nuevo-registro .btn-primary:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.nuevo-registro .btn i {
+    font-size: 14px;
+}
