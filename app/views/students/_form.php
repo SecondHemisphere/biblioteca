@@ -1,6 +1,9 @@
+<!-- Formulario para crear o editar un estudiante -->
 <form action="<?= $form_action ?>" method="POST" novalidate>
+
     <!-- Grupo 1: Datos de identificación -->
     <div class="grupo-campos">
+        <!-- Campo: Código del estudiante -->
         <div class="campo <?= isset($errors['codigo']) ? 'error-input' : '' ?>">
             <label for="codigo">Código</label>
             <input type="text" name="codigo" id="codigo"
@@ -9,7 +12,8 @@
                 <span class="error"><?= htmlspecialchars($errors['codigo']) ?></span>
             <?php endif; ?>
         </div>
-        
+
+        <!-- Campo: DNI del estudiante -->
         <div class="campo <?= isset($errors['dni']) ? 'error-input' : '' ?>">
             <label for="dni">DNI</label>
             <input type="text" name="dni" id="dni"
@@ -18,7 +22,8 @@
                 <span class="error"><?= htmlspecialchars($errors['dni']) ?></span>
             <?php endif; ?>
         </div>
-        
+
+        <!-- Campo: Estado del estudiante (activo/inactivo) -->
         <div class="campo">
             <label for="estado">Estado</label>
             <select name="estado" id="estado" required>
@@ -30,6 +35,7 @@
 
     <!-- Grupo 2: Datos personales -->
     <div class="grupo-campos">
+        <!-- Campo: Nombre completo -->
         <div class="campo campo-ancho <?= isset($errors['nombre']) ? 'error-input' : '' ?>">
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" id="nombre"
@@ -38,7 +44,8 @@
                 <span class="error"><?= htmlspecialchars($errors['nombre']) ?></span>
             <?php endif; ?>
         </div>
-        
+
+        <!-- Campo: Carrera (select con opciones disponibles) -->
         <div class="campo campo-ancho <?= isset($errors['carrera']) ? 'error-input' : '' ?>">
             <label for="carrera">Carrera</label>
             <select name="carrera" id="carrera" required>
@@ -58,6 +65,7 @@
 
     <!-- Grupo 3: Datos de contacto -->
     <div class="grupo-campos">
+        <!-- Campo: Dirección -->
         <div class="campo campo-ancho <?= isset($errors['direccion']) ? 'error-input' : '' ?>">
             <label for="direccion">Dirección</label>
             <input type="text" name="direccion" id="direccion"
@@ -66,7 +74,8 @@
                 <span class="error"><?= htmlspecialchars($errors['direccion']) ?></span>
             <?php endif; ?>
         </div>
-        
+
+        <!-- Campo: Teléfono -->
         <div class="campo <?= isset($errors['telefono']) ? 'error-input' : '' ?>">
             <label for="telefono">Teléfono</label>
             <input type="text" name="telefono" id="telefono"
@@ -77,7 +86,7 @@
         </div>
     </div>
 
-    <!-- Botones -->
+    <!-- Grupo de botones -->
     <div class="contenedor-botones">
         <a href="/students" class="boton boton-cancelar">Cancelar</a>
         <button type="submit" class="boton boton-registrar">Guardar</button>

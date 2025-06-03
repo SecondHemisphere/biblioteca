@@ -1,3 +1,15 @@
+<?php
+
+/**
+ * Componente: modal-confirmacion.php
+ * Descripción: Muestra un modal para confirmar acciones sensibles (como eliminar).
+ *
+ * Parámetros esperados:
+ * - $mensaje_confirmacion (string): Mensaje personalizado de confirmación (opcional).
+ */
+
+?>
+
 <div id="confirmModal" class="custom-confirm">
     <div class="confirm-content">
         <div class="confirm-icon">!</div>
