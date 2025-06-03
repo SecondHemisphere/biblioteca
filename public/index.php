@@ -19,7 +19,11 @@ $routeMap = [
 
     '/students' => ['StudentController', 'index'],
     '/students/create' => ['StudentController', 'create'],
-    '/students/store' => ['StudentController', 'store']
+    '/students/store' => ['StudentController', 'store'],
+
+    '/subjects' => ['SubjectController', 'index'],
+    '/subjects/create' => ['SubjectController', 'create'],
+    '/subjects/store' => ['SubjectController', 'store']
 ];
 
 // Soporte para rutas dinámicas
@@ -35,6 +39,18 @@ if (array_key_exists($path, $routeMap)) {
     $_GET['id'] = $matches[1];
 } elseif (preg_match('#^/students/delete/(\d+)$#', $path, $matches)) {
     $controllerName = 'StudentController';
+    $method = 'delete';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/subjects/edit/(\d+)$#', $path, $matches)) {
+    $controllerName = 'SubjectController';
+    $method = 'edit';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/subjects/update/(\d+)$#', $path, $matches)) {
+    $controllerName = 'SubjectController';
+    $method = 'update';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/subjects/delete/(\d+)$#', $path, $matches)) {
+    $controllerName = 'SubjectController';
     $method = 'delete';
     $_GET['id'] = $matches[1];
 } else {

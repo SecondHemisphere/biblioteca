@@ -32,8 +32,8 @@
                 </a>
             </li>
             <!-- Materias -->
-            <li class="<?php echo ($current_page == 'materias') ? 'active' : '' ?>">
-                <a href="<?php echo URL_ROOT; ?>/materias">
+            <li class="<?php echo ($current_page == 'subjects') ? 'active' : '' ?>">
+                <a href="/subjects">
                     <i class="fas fa-chalkboard-teacher"></i>
                     <span>Materias</span>
                 </a>
