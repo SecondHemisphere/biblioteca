@@ -201,12 +201,16 @@ class Student
     {
         $errors = [];
 
+        // Validar código
         if (empty($data['codigo'])) {
             $errors['codigo'] = 'El código es requerido';
+        } elseif (!$this->validateCode($data['codigo'])) {
+            $errors['codigo'] = 'El código debe tener 10 caracteres';
         } elseif ($this->findStudentByCode($data['codigo'])) {
             $errors['codigo'] = 'El código ya está registrado';
         }
 
+        // Validar DNI
         if (empty($data['dni'])) {
             $errors['dni'] = 'El DNI es requerido';
         } elseif (!$this->validateDni($data['dni'])) {
@@ -215,14 +219,35 @@ class Student
             $errors['dni'] = 'El DNI ya está registrado';
         }
 
+        // Validar nombre
         if (empty($data['nombre'])) {
             $errors['nombre'] = 'El nombre es requerido';
-        } elseif (strlen($data['nombre']) > 100) {
-            $errors['nombre'] = 'El nombre no puede exceder los 100 caracteres';
+        } elseif (strlen($data['nombre']) > 150) {
+            $errors['nombre'] = 'El nombre no puede exceder los 150 caracteres';
         }
 
+        // Validar carrera
         if (empty($data['carrera'])) {
             $errors['carrera'] = 'La carrera es requerida';
+        } elseif (strlen($data['carrera']) > 150) {
+            $errors['carrera'] = 'La carrera no puede exceder los 150 caracteres';
+        }
+
+        // Validar dirección
+        if (empty($data['direccion'])) {
+            $errors['direccion'] = 'La dirección es requerida';
+        }
+
+        // Validar teléfono
+        if (empty($data['telefono'])) {
+            $errors['telefono'] = 'El teléfono es requerido';
+        } elseif (!$this->validatePhone($data['telefono'])) {
+            $errors['telefono'] = 'El teléfono debe tener entre 7 y 15 dígitos numéricos';
+        }
+
+        // Validar estado
+        if (isset($data['estado']) && !in_array($data['estado'], [0, 1])) {
+            $errors['estado'] = 'El estado debe ser 0 (inactivo) o 1 (activo)';
         }
 
         return empty($errors) ? true : $errors;
@@ -230,20 +255,24 @@ class Student
 
     /**
      * Valida los datos para actualización
-     * @param int $id ID del estudiante
      * @param array $data Datos a validar
+     * @param object $currentStudent Estudiante actual (objeto)
      * @return array|true Lista de errores o true si es válido
      */
     public function validateUpdateData($data, $currentStudent)
     {
         $errors = [];
 
+        // Validar código
         if (empty($data['codigo'])) {
             $errors['codigo'] = 'El código es requerido';
+        } elseif (!$this->validateCode($data['codigo'])) {
+            $errors['codigo'] = 'El código debe tener 10 caracteres';
         } elseif ($data['codigo'] !== $currentStudent->codigo && $this->findStudentByCode($data['codigo'])) {
             $errors['codigo'] = 'El código ya está registrado';
         }
 
+        // Validar DNI
         if (empty($data['dni'])) {
             $errors['dni'] = 'El DNI es requerido';
         } elseif (!$this->validateDni($data['dni'])) {
@@ -252,14 +281,35 @@ class Student
             $errors['dni'] = 'El DNI ya está registrado';
         }
 
+        // Validar nombre
         if (empty($data['nombre'])) {
             $errors['nombre'] = 'El nombre es requerido';
-        } elseif (strlen($data['nombre']) > 100) {
-            $errors['nombre'] = 'El nombre no puede exceder los 100 caracteres';
+        } elseif (strlen($data['nombre']) > 150) {
+            $errors['nombre'] = 'El nombre no puede exceder los 150 caracteres';
         }
 
+        // Validar carrera
         if (empty($data['carrera'])) {
             $errors['carrera'] = 'La carrera es requerida';
+        } elseif (strlen($data['carrera']) > 150) {
+            $errors['carrera'] = 'La carrera no puede exceder los 150 caracteres';
+        }
+
+        // Validar dirección
+        if (empty($data['direccion'])) {
+            $errors['direccion'] = 'La dirección es requerida';
+        }
+
+        // Validar teléfono
+        if (empty($data['telefono'])) {
+            $errors['telefono'] = 'El teléfono es requerido';
+        } elseif (!$this->validatePhone($data['telefono'])) {
+            $errors['telefono'] = 'El teléfono debe tener entre 7 y 15 dígitos numéricos';
+        }
+
+        // Validar estado
+        if (isset($data['estado']) && !in_array($data['estado'], [0, 1])) {
+            $errors['estado'] = 'El estado debe ser 0 (inactivo) o 1 (activo)';
         }
 
         return empty($errors) ? true : $errors;
@@ -273,6 +323,26 @@ class Student
     public function validateDni($dni)
     {
         return preg_match('/^[0-9]{10}$/', $dni);
+    }
+
+    /**
+     * Valida que el código tenga el formato correcto
+     * @param string $code Código a validar
+     * @return bool True si es válido
+     */
+    public function validateCode($code)
+    {
+        return preg_match('/^[A-Za-z0-9]{10}$/', $code);
+    }
+
+    /**
+     * Valida que el teléfono tenga el formato correcto
+     * @param string $phone Teléfono a validar
+     * @return bool True si es válido
+     */
+    public function validatePhone($phone)
+    {
+        return preg_match('/^\d{7,15}$/', $phone);
     }
 
     /**

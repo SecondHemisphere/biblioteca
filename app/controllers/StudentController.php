@@ -42,7 +42,7 @@ class StudentController
     {
         $data = [
             'title' => 'Registrar Nuevo Estudiante',
-            'careers' => ['Ingeniería de sistemas', 'Ingeniería', 'Medicina', 'Derecho', 'Administración'],
+            'careers' => require __DIR__ . '/../config/carreras.php',
             'student' => new stdClass(), // Estudiante vacío
             'errors' => [],
             'form_action' => '/students/store',
@@ -107,7 +107,7 @@ class StudentController
         $data = [
             'title' => 'Editar Estudiante',
             'student' => $student,
-            'careers' => ['Ingeniería de sistemas', 'Ingeniería', 'Medicina', 'Derecho', 'Administración'],
+            'careers' => require __DIR__ . '/../config/carreras.php',
             'errors' => [],
             'form_action' => "/students/update/$id",
             'current_page' => 'students'
