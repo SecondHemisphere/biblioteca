@@ -16,9 +16,6 @@
     // Texto del botón de envío
     $submit_text = "Registrar";
 
-    // Lista de carreras disponibles
-    $careers = $data['careers'];
-
     // Inclusión del formulario reutilizable
     include __DIR__ . '/_form.php';
     ?>

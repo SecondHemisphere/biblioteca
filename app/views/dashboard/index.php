@@ -23,12 +23,12 @@
         <div class="tarjeta-estadistica">
             <i class="fas fa-building"></i>
             <h3>Editorial</h3>
-            <p>1</p>
+            <p><?= $data['total_editoriales'] ?></p>
         </div>
         <div class="tarjeta-estadistica">
             <i class="fas fa-user-graduate"></i>
             <h3>Estudiantes</h3>
-            <p>2</p>
+            <p><?= $data['total_estudiantes'] ?></p>
         </div>
         <div class="tarjeta-estadistica">
             <i class="fas fa-book-reader"></i>
@@ -38,7 +38,7 @@
         <div class="tarjeta-estadistica">
             <i class="fas fa-chalkboard-teacher"></i>
             <h3>Materias</h3>
-            <p>4</p>
+            <p><?= $data['total_materias'] ?></p>
         </div>
     </div>
     

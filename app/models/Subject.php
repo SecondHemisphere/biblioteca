@@ -112,10 +112,10 @@ class Subject
     }
 
     /**
-     * Actualiza una materia
-     * @param int $id
-     * @param array $data
-     * @return array
+     * Actualiza una materia existente
+     * @param int $id ID de la materia
+     * @param array $data Datos actualizados
+     * @return array Resultado de la operación
      */
     public function update($id, $data)
     {
@@ -129,9 +129,19 @@ class Subject
             return ['success' => false, 'errors' => $validation];
         }
 
-        $this->db->query('UPDATE materias SET materia = :materia, estado = :estado WHERE id = :id');
-        $this->db->bind(':materia', $data['materia']);
-        $this->db->bind(':estado', $data['estado']);
+        // Construimos dinámicamente el SQL SET
+        $fields = [];
+        foreach ($data as $key => $value) {
+            $fields[] = "$key = :$key";
+        }
+        $sqlSet = implode(', ', $fields);
+
+        $this->db->query("UPDATE materias SET $sqlSet WHERE id = :id");
+
+        // Enlazamos parámetros
+        foreach ($data as $key => $value) {
+            $this->db->bind(":$key", $value);
+        }
         $this->db->bind(':id', $id);
 
         $success = $this->db->execute();
@@ -172,10 +182,15 @@ class Subject
     {
         $errors = [];
 
+        // Validar nombre
         if (empty($data['materia'])) {
-            $errors['materia'] = 'El nombre de la materia es requerido';
-        } elseif (strlen($data['materia']) > 100) {
-            $errors['materia'] = 'El nombre no puede exceder los 100 caracteres';
+            $errors['materia'] = 'El nombre es requerido';
+        } elseif (strlen($data['materia']) > 50) {
+            $errors['materia'] = 'El nombre no puede exceder los 50 caracteres';
+        } elseif (!$this->validateName($data['materia'])) {
+            $errors['materia'] = 'El nombre solo debe contener letras y espacios';
+        } elseif ($this->findByName($data['materia'])) {
+            $errors['materia'] = 'El nombre ya está registrado';
         }
 
         return empty($errors) ? true : $errors;
@@ -191,34 +206,28 @@ class Subject
     {
         $errors = [];
 
+        // Validar nombre
         if (empty($data['materia'])) {
-            $errors['materia'] = 'El nombre de la materia es requerido';
-        } elseif (strlen($data['materia']) > 100) {
-            $errors['materia'] = 'El nombre no puede exceder los 100 caracteres';
-        } elseif (
-            $data['materia'] !== $currentSubject->materia &&
-            $this->findByName($data['materia'])
-        ) {
-            $errors['materia'] = 'La materia ya está registrada';
+            $errors['materia'] = 'El nombre es requerido';
+        } elseif (strlen($data['materia']) > 50) {
+            $errors['materia'] = 'El nombre no puede exceder los 50 caracteres';
+        } elseif (!$this->validateName($data['materia'])) {
+            $errors['materia'] = 'El nombre solo debe contener letras y espacios';
+        } elseif ($data['materia'] !== $currentSubject->materia && $this->findByName($data['materia'])) {
+            $errors['materia'] = 'El nombre ya está registrado';
         }
 
         return empty($errors) ? true : $errors;
     }
 
     /**
-     * Obtiene estadísticas por estado
-     * @return array
+     * Valida que el nombre tenga el formato correcto
+     * @param string $name Nombre a validar
+     * @return bool True si es válido
      */
-    public function getStatistics()
+    public function validateName($name)
     {
-        $this->db->query('
-            SELECT
-                estado,
-                COUNT(*) as total
-            FROM materias
-            GROUP BY estado
-        ');
-        return $this->db->resultSet();
+        return preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u', $name);
     }
 
     /**

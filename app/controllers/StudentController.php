@@ -82,7 +82,7 @@ class StudentController
                     'title' => 'Registrar Nuevo Estudiante',
                     'student' => (object) $dataInput,
                     'errors' => $validation,
-                    'careers' => ['Ingeniería de sistemas', 'Ingeniería', 'Medicina', 'Derecho', 'Administración'],
+                    'careers' => require_once __DIR__ . '../../../config/carreras.php',
                     'form_action' => '/students/store',
                     'current_page' => 'students'
                 ];
@@ -151,7 +151,7 @@ class StudentController
                     'title' => 'Editar Estudiante',
                     'student' => (object) array_merge((array) $originalStudent, $dataInput),
                     'errors' => $validation,
-                    'careers' => ['Ingeniería de sistemas', 'Ingeniería', 'Medicina', 'Derecho', 'Administración'],
+                    'careers' => require_once __DIR__ . '../../../config/carreras.php',
                     'form_action' => "/students/update/$id",
                     'current_page' => 'students'
                 ];

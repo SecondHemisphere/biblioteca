@@ -109,6 +109,16 @@ class Publisher
     }
 
     /**
+     * Valida que el nombre tenga el formato correcto
+     * @param string $name Nombre a validar
+     * @return bool True si es válido
+     */
+    public function validateName($name)
+    {
+        return preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u', $name);
+    }
+
+    /**
      * Valida datos de editorial
      * @param array $data
      * @param int|null $id
@@ -118,10 +128,15 @@ class Publisher
     {
         $errors = [];
 
+        // Validar nombre
         if (empty($data['editorial'])) {
-            $errors['editorial'] = 'El nombre de la editorial es requerido';
-        } elseif (strlen($data['editorial']) > 150) {
-            $errors['editorial'] = 'El nombre no puede exceder los 150 caracteres';
+            $errors['editorial'] = 'El nombre es requerido';
+        } elseif (strlen($data['editorial']) > 100) {
+            $errors['editorial'] = 'El nombre no puede exceder los 100 caracteres';
+        } elseif (!$this->validateName($data['editorial'])) {
+            $errors['editorial'] = 'El nombre solo debe contener letras y espacios';
+        } elseif ($this->findByName($data['editorial'])) {
+            $errors['editorial'] = 'El nombre ya está registrado';
         }
 
         return empty($errors) ? true : $errors;
@@ -138,32 +153,18 @@ class Publisher
     {
         $errors = [];
 
+        // Validar nombre
         if (empty($data['editorial'])) {
-            $errors['editorial'] = 'El nombre de la editorial es requerido';
-        } elseif (strlen($data['editorial']) > 150) {
-            $errors['editorial'] = 'El nombre no puede exceder los 150 caracteres';
-        } elseif (
-            $data['editorial'] !== $currentPublisher->editorial &&
-            $this->findByName($data['editorial'])
-        ) {
-            $errors['editorial'] = 'La editorial ya está registrada';
+            $errors['editorial'] = 'El nombre es requerido';
+        } elseif (strlen($data['editorial']) > 100) {
+            $errors['editorial'] = 'El nombre no puede exceder los 100 caracteres';
+        } elseif (!$this->validateName($data['editorial'])) {
+            $errors['editorial'] = 'El nombre solo debe contener letras y espacios';
+        } elseif ($data['editorial'] !== $currentPublisher->editorial && $this->findByName($data['editorial'])) {
+            $errors['editorial'] = 'El nombre ya está registrado';
         }
 
         return empty($errors) ? true : $errors;
-    }
-
-    /**
-     * Obtiene estadísticas por estado
-     * @return array
-     */
-    public function getStatistics()
-    {
-        $this->db->query('
-            SELECT estado, COUNT(*) as total
-            FROM editoriales
-            GROUP BY estado
-        ');
-        return $this->db->resultSet();
     }
 
     /**

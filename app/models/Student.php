@@ -261,11 +261,6 @@ class Student
             $errors['telefono'] = 'El teléfono debe tener entre 7 y 15 dígitos numéricos';
         }
 
-        // Validar estado
-        if (isset($data['estado']) && !in_array($data['estado'], [0, 1])) {
-            $errors['estado'] = 'El estado debe ser 0 (inactivo) o 1 (activo)';
-        }
-
         return empty($errors) ? true : $errors;
     }
 
@@ -327,11 +322,6 @@ class Student
             $errors['telefono'] = 'El teléfono debe tener entre 7 y 15 dígitos numéricos';
         }
 
-        // Validar estado
-        if (isset($data['estado']) && !in_array($data['estado'], [0, 1])) {
-            $errors['estado'] = 'El estado debe ser 0 (inactivo) o 1 (activo)';
-        }
-
         return empty($errors) ? true : $errors;
     }
 
@@ -373,24 +363,6 @@ class Student
     public function validatePhone($phone)
     {
         return preg_match('/^\d{7,15}$/', $phone);
-    }
-
-    /**
-     * Obtiene estadísticas de estudiantes por carrera
-     * @return array Estadísticas organizadas por carrera
-     */
-    public function getStatistics()
-    {
-        $this->db->query('
-            SELECT
-                carrera,
-                COUNT(*) as total,
-                SUM(CASE WHEN estado = 1 THEN 1 ELSE 0 END) as activos,
-                SUM(CASE WHEN estado = 0 THEN 1 ELSE 0 END) as inactivos
-            FROM estudiantes
-            GROUP BY carrera
-        ');
-        return $this->db->resultSet();
     }
 
     /**

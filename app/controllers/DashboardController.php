@@ -23,10 +23,26 @@ class DashboardController
         // Obtiene los datos del usuario actual desde la sesión
         $user = $this->userModel->getUserById($_SESSION['user_id']);
 
+        $studentModel = new Student($this->db);
+        $totalEstudiantes = $studentModel->getTotalStudents();
+
+        $subjectModel = new Subject($this->db);
+        $totalMaterias = $subjectModel->getTotalSubjects();
+
+        $publisherModel = new Publisher($this->db);
+        $totalEditoriales = $publisherModel->getTotal();
+
         // Datos que se pasan a la vista
         $data = [
             'title' => 'Dashboard',
-            'user' => $user
+            'user' => $user,
+            'total_usuarios' => 2,
+            'total_libros' => 4,
+            'total_autores' => 1,
+            'total_editoriales' => $totalEditoriales,
+            'total_estudiantes' => $totalEstudiantes,
+            'total_prestamos' => 0,
+            'total_materias' => $totalMaterias,
         ];
 
         // Variable opcional para marcar el menú activo en la vista
