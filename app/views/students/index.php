@@ -6,7 +6,7 @@ $pagina_actual = isset($_GET['pagina']) ? max(1, (int)$_GET['pagina']) : 1;
 $total_paginas = ceil($total_registros / $por_pagina);
 
 $offset = ($pagina_actual - 1) * $por_pagina;
-$estudiantes_paginados = array_slice($data['students'], $offset, $por_pagina);
+$registros_paginados = array_slice($data['students'], $offset, $por_pagina);
 
 $inicio = $offset + 1;
 $fin = min($total_registros, $pagina_actual * $por_pagina);
@@ -32,6 +32,7 @@ $fin = min($total_registros, $pagina_actual * $por_pagina);
 
     <!-- Encabezado: control de entradas y botón para nuevo estudiante -->
     <?php
+    $ruta_index = '/students';
     $ruta_crear = '/students/create';
     $texto_boton = 'Nuevo Estudiante';
     $opciones_por_pagina = [5, 10, 25, 50];
@@ -52,7 +53,7 @@ $fin = min($total_registros, $pagina_actual * $por_pagina);
             ['campo' => 'estado', 'titulo' => 'Estado'],
         ];
 
-        $filas = $estudiantes_paginados;
+        $filas = $registros_paginados;
         $ruta_base = '/students';
 
         include __DIR__ . '/../components/tabla-generica.php';

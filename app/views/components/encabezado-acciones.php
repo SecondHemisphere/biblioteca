@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Componente: encabezado-acciones.php
  * Descripción: Muestra el encabezado de una sección con total de entradas visibles
@@ -15,8 +16,8 @@
 
 <div class="encabezado">
     <h2>
-        Mostrando |
-        <form method="GET" action="/students" style="display:inline;">
+        Ver |
+        <form method="GET" action="<?= htmlspecialchars($ruta_index) ?>" style="display:inline;">
             <select name="por_pagina" onchange="this.form.submit()">
                 <?php foreach ($opciones_por_pagina as $opcion): ?>
                     <option value="<?= $opcion ?>" <?= $por_pagina == $opcion ? 'selected' : '' ?>>
