@@ -169,6 +169,18 @@ class Student
     }
 
     /**
+     * Busca estudiante por nombre
+     * @param string $nombre Nombre del estudiante
+     * @return object|false Objeto estudiante o false si no existe
+     */
+    public function findStudentByName($nombre)
+    {
+        $this->db->query('SELECT * FROM estudiantes WHERE nombre = :nombre');
+        $this->db->bind(':nombre', $nombre);
+        return $this->db->single();
+    }
+
+    /**
      * Busca estudiante por código
      * @param string $codigo Código del estudiante
      * @return object|false Objeto estudiante o false si no existe
@@ -224,6 +236,10 @@ class Student
             $errors['nombre'] = 'El nombre es requerido';
         } elseif (strlen($data['nombre']) > 150) {
             $errors['nombre'] = 'El nombre no puede exceder los 150 caracteres';
+        } elseif (!$this->validateName($data['nombre'])) {
+            $errors['nombre'] = 'El nombre solo debe contener letras y espacios';
+        } elseif ($this->findStudentByName($data['nombre'])) {
+            $errors['nombre'] = 'El nombre ya está registrado';
         }
 
         // Validar carrera
@@ -286,6 +302,10 @@ class Student
             $errors['nombre'] = 'El nombre es requerido';
         } elseif (strlen($data['nombre']) > 150) {
             $errors['nombre'] = 'El nombre no puede exceder los 150 caracteres';
+        } elseif (!$this->validateName($data['nombre'])) {
+            $errors['nombre'] = 'El nombre solo debe contener letras y espacios';
+        } elseif ($data['nombre'] !== $currentStudent->nombre && $this->findStudentByName($data['nombre'])) {
+            $errors['nombre'] = 'El nombre ya está registrado';
         }
 
         // Validar carrera
@@ -313,6 +333,16 @@ class Student
         }
 
         return empty($errors) ? true : $errors;
+    }
+
+    /**
+     * Valida que el nombre tenga el formato correcto
+     * @param string $name Nombre a validar
+     * @return bool True si es válido
+     */
+    public function validateName($name)
+    {
+        return preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u', $name);
     }
 
     /**
