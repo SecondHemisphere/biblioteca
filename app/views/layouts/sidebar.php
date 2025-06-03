@@ -18,8 +18,8 @@
                 </a>
             </li>
             <!-- Préstamos -->
-            <li class="<?php echo ($current_page == 'prestamos') ? 'active' : '' ?>">
-                <a href="<?php echo URL_ROOT; ?>/prestamos">
+            <li class="<?php echo ($current_page == 'loans') ? 'active' : '' ?>">
+                <a href="/loans">
                     <i class="fas fa-exchange-alt"></i>
                     <span>Préstamos</span>
                 </a>
@@ -39,15 +39,15 @@
                 </a>
             </li>
             <!-- Libros -->
-            <li class="<?php echo ($current_page == 'libros') ? 'active' : '' ?>">
-                <a href="<?php echo URL_ROOT; ?>/libros">
+            <li class="<?php echo ($current_page == 'books') ? 'active' : '' ?>">
+                <a href="/books">
                     <i class="fas fa-book"></i>
                     <span>Libros</span>
                 </a>
             </li>
             <!-- Autores -->
-            <li class="<?php echo ($current_page == 'autores') ? 'active' : '' ?>">
-                <a href="<?php echo URL_ROOT; ?>/autores">
+            <li class="<?php echo ($current_page == 'authors') ? 'active' : '' ?>">
+                <a href="/authors">
                     <i class="fas fa-feather-alt"></i>
                     <span>Autores</span>
                 </a>

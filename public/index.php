@@ -27,7 +27,19 @@ $routeMap = [
 
     '/publishers' => ['PublisherController', 'index'],
     '/publishers/create' => ['PublisherController', 'create'],
-    '/publishers/store' => ['PublisherController', 'store']
+    '/publishers/store' => ['PublisherController', 'store'],
+
+    '/authors' => ['AuthorController', 'index'],
+    '/authors/create' => ['AuthorController', 'create'],
+    '/authors/store' => ['AuthorController', 'store'],
+
+    '/books' => ['BookController', 'index'],
+    '/books/create' => ['BookController', 'create'],
+    '/books/store' => ['BookController', 'store'],
+
+    '/loans' => ['LoanController', 'index'],
+    '/loans/create' => ['LoanController', 'create'],
+    '/loans/store' => ['LoanController', 'store'],
 ];
 
 // Soporte para rutas dinámicas
@@ -67,6 +79,42 @@ if (array_key_exists($path, $routeMap)) {
     $_GET['id'] = $matches[1];
 } elseif (preg_match('#^/publishers/delete/(\d+)$#', $path, $matches)) {
     $controllerName = 'PublisherController';
+    $method = 'delete';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/authors/edit/(\d+)$#', $path, $matches)) {
+    $controllerName = 'AuthorController';
+    $method = 'edit';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/authors/update/(\d+)$#', $path, $matches)) {
+    $controllerName = 'AuthorController';
+    $method = 'update';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/authors/delete/(\d+)$#', $path, $matches)) {
+    $controllerName = 'AuthorController';
+    $method = 'delete';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/books/edit/(\d+)$#', $path, $matches)) {
+    $controllerName = 'BookController';
+    $method = 'edit';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/books/update/(\d+)$#', $path, $matches)) {
+    $controllerName = 'BookController';
+    $method = 'update';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/books/delete/(\d+)$#', $path, $matches)) {
+    $controllerName = 'BookController';
+    $method = 'delete';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/loans/edit/(\d+)$#', $path, $matches)) {
+    $controllerName = 'LoanController';
+    $method = 'edit';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/loans/update/(\d+)$#', $path, $matches)) {
+    $controllerName = 'LoanController';
+    $method = 'update';
+    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/loans/delete/(\d+)$#', $path, $matches)) {
+    $controllerName = 'LoanController';
     $method = 'delete';
     $_GET['id'] = $matches[1];
 } else {
