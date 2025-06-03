@@ -53,8 +53,8 @@
                 </a>
             </li>
             <!-- Editoriales -->
-            <li class="<?php echo ($current_page == 'editoriales') ? 'active' : '' ?>">
-                <a href="<?php echo URL_ROOT; ?>/editoriales">
+            <li class="<?php echo ($current_page == 'publishers') ? 'active' : '' ?>">
+                <a href="/publishers">
                     <i class="fas fa-building"></i>
                     <span>Editoriales</span>
                 </a>
