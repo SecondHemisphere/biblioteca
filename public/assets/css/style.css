@@ -25,12 +25,6 @@
     padding: 0;
 }
 
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f5f7fa;
-    color: #2c3e50;
-}
-
 html {
     font-size: 62.5%; /* 1rem = 10px */
     height: 100%;
@@ -40,8 +34,9 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: "Playpen Sans";
     background-color: var(--color-fondo);
+    color: #2c3e50;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -183,7 +178,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding-top: 1rem;
 }
 
@@ -411,8 +405,6 @@ body {
 
 /* Estilos específicos para los listados */
 .contenedor-listados {
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
     background-color: #ffffff;
 }

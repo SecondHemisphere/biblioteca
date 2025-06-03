@@ -1,6 +1,5 @@
 /* Estilos base del formulario */
 .formulario {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1.4rem;
     display: flex;
     flex-direction: column;
