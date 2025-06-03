@@ -119,12 +119,12 @@ class Subject
      */
     public function update($id, $data)
     {
-        $subject = $this->getSubjectById($id);
-        if (!$subject) {
+        $currentSubject = $this->getSubjectById($id);
+        if (!$currentSubject) {
             return ['success' => false, 'errors' => ['general' => 'Materia no encontrada']];
         }
 
-        $validation = $this->validateSubjectData($data, $id);
+        $validation = $this->validateUpdateData($data, $currentSubject);
         if ($validation !== true) {
             return ['success' => false, 'errors' => $validation];
         }

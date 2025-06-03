@@ -65,19 +65,29 @@ class Publisher
      */
     public function update($id, $data)
     {
-        $editorial = $this->getById($id);
-        if (!$editorial) {
+        $currentPublisher = $this->getById($id);
+        if (!$currentPublisher) {
             return ['success' => false, 'errors' => ['general' => 'Editorial no encontrada']];
         }
 
-        $validation = $this->validatePublisherData($data, $id);
+        $validation = $this->validateUpdateData($data, $currentPublisher);
         if ($validation !== true) {
             return ['success' => false, 'errors' => $validation];
         }
 
-        $this->db->query('UPDATE editoriales SET editorial = :editorial, estado = :estado WHERE id = :id');
-        $this->db->bind(':editorial', $data['editorial']);
-        $this->db->bind(':estado', $data['estado']);
+        // Construimos dinámicamente el SQL SET
+        $fields = [];
+        foreach ($data as $key => $value) {
+            $fields[] = "$key = :$key";
+        }
+        $sqlSet = implode(', ', $fields);
+
+        $this->db->query("UPDATE editoriales SET $sqlSet WHERE id = :id");
+
+        // Enlazamos parámetros
+        foreach ($data as $key => $value) {
+            $this->db->bind(":$key", $value);
+        }
         $this->db->bind(':id', $id);
 
         $success = $this->db->execute();
@@ -106,16 +116,6 @@ class Publisher
         $this->db->query('SELECT * FROM editoriales WHERE editorial = :editorial');
         $this->db->bind(':editorial', $nombre);
         return $this->db->single();
-    }
-
-    /**
-     * Valida que el nombre tenga el formato correcto
-     * @param string $name Nombre a validar
-     * @return bool True si es válido
-     */
-    public function validateName($name)
-    {
-        return preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u', $name);
     }
 
     /**
@@ -165,6 +165,16 @@ class Publisher
         }
 
         return empty($errors) ? true : $errors;
+    }
+
+    /**
+     * Valida que el nombre tenga el formato correcto
+     * @param string $name Nombre a validar
+     * @return bool True si es válido
+     */
+    public function validateName($name)
+    {
+        return preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u', $name);
     }
 
     /**

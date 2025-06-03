@@ -8,17 +8,17 @@
         <div class="tarjeta-estadistica">
             <i class="fas fa-users"></i>
             <h3>Usuarios</h3>
-            <p>2</p>
+            <p>?</p>
         </div>
         <div class="tarjeta-estadistica">
             <i class="fas fa-book"></i>
             <h3>Libros</h3>
-            <p>4</p>
+            <p>?</p>
         </div>
         <div class="tarjeta-estadistica">
             <i class="fas fa-feather-alt"></i>
             <h3>Autor</h3>
-            <p>3</p>
+            <p>?</p>
         </div>
         <div class="tarjeta-estadistica">
             <i class="fas fa-building"></i>
@@ -33,7 +33,7 @@
         <div class="tarjeta-estadistica">
             <i class="fas fa-book-reader"></i>
             <h3>Préstamos</h3>
-            <p>0</p>
+            <p>?</p>
         </div>
         <div class="tarjeta-estadistica">
             <i class="fas fa-chalkboard-teacher"></i>
