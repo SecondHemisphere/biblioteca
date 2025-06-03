@@ -17,33 +17,14 @@ $base_url = '/students';
 ?>
 
 <div class="contenedor-estudiantes">
-    <!-- Modal personalizado para mensajes flash -->
-    <?php if ($data['success_message'] || $data['error_message']): ?>
-        <div id="customAlert" class="custom-alert" style="display: flex;">
-            <div class="alert-content <?= $data['error_message'] ? 'error' : 'success' ?>">
-                <div class="alert-icon">
-                    <?= $data['error_message'] ? '✕' : '✓' ?>
-                </div>
-                <h3><?= $data['error_message'] ? 'Error' : '¡Correcto!' ?></h3>
-                <p><?= htmlspecialchars($data['error_message'] ?: $data['success_message']) ?></p>
-                <button id="alertConfirmBtn" class="alert-button">
-                    Aceptar
-                </button>
-            </div>
-        </div>
-    <?php endif; ?>
+    <?php
+    $mensaje_exito = $data['success_message'] ?? '';
+    $mensaje_error = $data['error_message'] ?? '';
+    include __DIR__ . '/../components/alerta-flash.php';
+    ?>
 
-    <div id="confirmModal" class="custom-confirm">
-        <div class="confirm-content">
-            <div class="confirm-icon">!</div>
-            <h3>Confirmar acción</h3>
-            <p>¿Estás seguro de que deseas eliminar este registro?</p>
-            <div class="confirm-actions">
-                <button id="confirmCancel" class="btn-cancel">Cancelar</button>
-                <button id="confirmDelete" class="btn-confirm">Eliminar</button>
-            </div>
-        </div>
-    </div>
+    <?php $mensaje_confirmacion = "¿Estás seguro de que deseas eliminar este estudiante?"; ?>
+    <?php include __DIR__ . '/../components/modal-confirmacion.php'; ?>
 
     <h1><?= htmlspecialchars($data['title']) ?></h1>
 
