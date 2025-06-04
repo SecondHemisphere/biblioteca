@@ -486,7 +486,7 @@ body {
 }
 
 .contenedor-tabla td {
-  padding: 0.5rem;
+  padding: 0.2rem 0.5rem;
   border-bottom: 0.1rem solid #e0e0e0;
   color: #333;
 }
@@ -542,7 +542,6 @@ body {
   display: inline-block;
   padding: 4px 10px;
   border-radius: 12px;
-  font-size: 1.2rem;
   font-weight: 500;
 }
 
@@ -559,49 +558,34 @@ body {
 /* Botones de acción */
 .contenedor-tabla .celda-acciones {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 10px;
-}
-
-.contenedor-tabla .boton-accion {
-  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  margin: 0 2px;
-  padding: 0;
-  transition: all 0.2s ease;
+  gap: 0.5rem;
 }
 
-.contenedor-tabla .boton-accion svg {
-  width: 2.5rem;
-  height: 2.5rem;
+.contenedor-tabla .btn-accion {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.8rem;
+    padding: auto;
 }
 
-.contenedor-tabla .boton-accion.editar {
-  color: #2c7be5;
-  border: 1px solid #2c7be5;
+.contenedor-tabla .btn-editar {
+  color: #2196f3;
 }
 
-.contenedor-tabla .boton-accion.editar:hover {
-  background: #2c7be5;
-  color: white;
+.contenedor-tabla .i {
+  padding: auto;
 }
 
-.contenedor-tabla .boton-accion.eliminar {
-  color: #e63757;
-  border: 1px solid #e63757;
-}
-
-.contenedor-tabla .boton-accion.eliminar:hover {
-  background: #e63757;
-  color: white;
+.contenedor-tabla .btn-eliminar {
+  color: #f44336;
 }
 
 /* Mensaje sin registros */

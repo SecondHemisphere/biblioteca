@@ -65,17 +65,14 @@
                             ?>
                         </td>
                     <?php endforeach; ?>
+                    <!-- Acciones: editar y eliminar -->
                     <td class="celda-acciones">
-                        <a href="<?= $ruta_base ?>/edit/<?= $fila->id ?>" class="boton-accion editar" title="Editar">
-                            <svg viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
-                            </svg>
+                        <a href="<?= $ruta_base ?>/edit/<?= $fila->id ?>" class="btn-accion btn-editar">
+                            <i class="fas fa-edit"></i>
                         </a>
                         <form action="<?= $ruta_base ?>/delete/<?= $fila->id ?>" method="POST" class="form-eliminar">
-                            <button type="submit" class="boton-accion eliminar" title="Eliminar" onclick="return confirm('¿Confirmas eliminar este registro?')">
-                                <svg viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
-                                </svg>
+                            <button type="button" class="btn-accion btn-eliminar">
+                                <i class="fas fa-trash"></i>
                             </button>
                         </form>
                     </td>
