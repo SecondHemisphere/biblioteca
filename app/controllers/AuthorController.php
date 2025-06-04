@@ -72,14 +72,16 @@ class AuthorController
                 'nacionalidad' => !empty($_POST['nacionalidad']) ? trim($_POST['nacionalidad']) : null,
                 'campo_estudio' => !empty($_POST['campo_estudio']) ? trim($_POST['campo_estudio']) : null,
                 'biografia' => !empty($_POST['biografia']) ? trim($_POST['biografia']) : null,
-                'estado' => isset($_POST['estado']) ? (int) $_POST['estado'] : 1
+                'estado' => isset($_POST['estado']) ? (int) $_POST['estado'] : 1,
+                'imagen' => $_FILES['imagen'] ?? null,
+                'eliminar_imagen' => $_POST['eliminar_imagen'] ?? 0
             ];
 
             $validation = $this->authorModel->validateAuthorData($dataInput);
 
             if ($validation === true) {
                 $result = $this->authorModel->create($dataInput);
-                
+
                 if ($result['success']) {
                     $_SESSION['success_message'] = 'Autor registrado correctamente';
                     header('Location: /authors');
@@ -139,14 +141,18 @@ class AuthorController
                 'nacionalidad' => !empty($_POST['nacionalidad']) ? trim($_POST['nacionalidad']) : null,
                 'campo_estudio' => !empty($_POST['campo_estudio']) ? trim($_POST['campo_estudio']) : null,
                 'biografia' => !empty($_POST['biografia']) ? trim($_POST['biografia']) : null,
-                'estado' => isset($_POST['estado']) ? (int) $_POST['estado'] : 1
+                'estado' => isset($_POST['estado']) ? (int) $_POST['estado'] : 1,
+                'imagen' => $_FILES['imagen']['size'] > 0 ? $_FILES['imagen'] : null
             ];
 
             $currentAuthor = $this->authorModel->getById($id);
+
+            $eliminarImagen = isset($_POST['eliminar_imagen']) && $_POST['eliminar_imagen'] == 1;
+
             $validation = $this->authorModel->validateUpdateData($dataInput, $currentAuthor);
 
             if ($validation === true) {
-                $result = $this->authorModel->update($id, $dataInput);
+                $result = $this->authorModel->update($id, $dataInput, $eliminarImagen);
 
                 $_SESSION['success_message'] = $result['success']
                     ? 'Autor actualizado correctamente'

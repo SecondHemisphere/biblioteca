@@ -42,6 +42,15 @@ class Author
             return ['success' => false, 'errors' => $validation];
         }
 
+        // Procesar imagen
+        $imagePath = null;
+        if (!empty($data['imagen'])) {
+            $imagePath = $this->handleImageUpload($data['imagen']);
+            if ($imagePath === false) {
+                return ['success' => false, 'errors' => ['imagen' => 'Error al subir la imagen']];
+            }
+        }
+
         $this->db->query('INSERT INTO autores (nombres, apellidos, fecha_nacimiento, fecha_fallecimiento, nacionalidad, campo_estudio, biografia, imagen, estado) 
                          VALUES (:nombres, :apellidos, :fecha_nacimiento, :fecha_fallecimiento, :nacionalidad, :campo_estudio, :biografia, :imagen, :estado)');
 
@@ -52,7 +61,7 @@ class Author
         $this->db->bind(':nacionalidad', $data['nacionalidad'] ?? null);
         $this->db->bind(':campo_estudio', $data['campo_estudio'] ?? null);
         $this->db->bind(':biografia', $data['biografia'] ?? null);
-        $this->db->bind(':imagen', $data['imagen'] ?? null);
+        $this->db->bind(':imagen', $imagePath);
         $this->db->bind(':estado', $data['estado'] ?? 1);
 
         $success = $this->db->execute();
@@ -68,7 +77,7 @@ class Author
      * @param array $data
      * @return array
      */
-    public function update($id, $data)
+    public function update($id, $data,  $eliminarImagen = false)
     {
         $currentAuthor = $this->getById($id);
         if (!$currentAuthor) {
@@ -80,7 +89,36 @@ class Author
             return ['success' => false, 'errors' => $validation];
         }
 
-        // Construimos dinámicamente el SQL SET
+        // Procesar imagen si existe
+        $imagePath = $currentAuthor->imagen;
+
+        if (!empty($data['imagen'])) {
+            $newImagePath = $this->handleImageUpload($data['imagen']);
+            if ($newImagePath === false) {
+                return ['success' => false, 'errors' => ['imagen' => 'Error al subir la imagen']];
+            }
+
+            // Eliminar imagen anterior si existe
+            if ($imagePath && file_exists($_SERVER['DOCUMENT_ROOT'] . $imagePath)) {
+                unlink($_SERVER['DOCUMENT_ROOT'] . $imagePath);
+            }
+
+            $imagePath = $newImagePath;
+            $data['imagen'] = $imagePath;
+        } elseif ($eliminarImagen) {
+            // Eliminar imagen si se marcó el checkbox
+            if ($imagePath && file_exists($_SERVER['DOCUMENT_ROOT'] . $imagePath)) {
+                unlink($_SERVER['DOCUMENT_ROOT'] . $imagePath);
+            }
+            $data['imagen'] = null;
+        } else {
+            // Mantener la imagen existente (no incluir en los datos a actualizar)
+            unset($data['imagen']);
+        }
+
+        $data['imagen'] = $imagePath;
+
+        // Construir dinámicamente el SQL SET
         $fields = [];
         foreach ($data as $key => $value) {
             $fields[] = "$key = :$key";
@@ -89,7 +127,7 @@ class Author
 
         $this->db->query("UPDATE autores SET $sqlSet WHERE id = :id");
 
-        // Enlazamos parámetros
+        // Enlazar parámetros
         foreach ($data as $key => $value) {
             $this->db->bind(":$key", $value);
         }
@@ -209,6 +247,18 @@ class Author
             $existingAuthor = $this->findByFullName($data['nombres'], $data['apellidos']);
             if ($existingAuthor && $existingAuthor->id != $id) {
                 $errors['general'] = 'Ya existe otro autor con estos nombres y apellidos';
+            }
+        }
+
+        // Validar imagen si se proporciona
+        if (isset($data['imagen']) && is_array($data['imagen'])) {
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (!in_array($data['imagen']['type'], $allowedTypes)) {
+                $errors['imagen'] = 'Formato de imagen no permitido (solo JPG, PNG o GIF)';
+            }
+
+            if ($data['imagen']['size'] > 2 * 1024 * 1024) {
+                $errors['imagen'] = 'La imagen es demasiado grande (máximo 2MB)';
             }
         }
 
@@ -358,5 +408,38 @@ class Author
         $this->db->query('SELECT COUNT(*) as total FROM autores');
         $result = $this->db->single();
         return $result->total;
+    }
+
+    private function handleImageUpload($fileData)
+    {
+        $uploadDir = __DIR__ . '/../../public/uploads/authors/';
+
+        // Crear directorio si no existe
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        // Validar archivo
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!in_array($fileData['type'], $allowedTypes)) {
+            return false;
+        }
+
+        // Validar tamaño (ej. máximo 2MB)
+        if ($fileData['size'] > 2 * 1024 * 1024) {
+            return false;
+        }
+
+        // Generar nombre único
+        $extension = pathinfo($fileData['name'], PATHINFO_EXTENSION);
+        $fileName = uniqid('author_') . '.' . $extension;
+        $destination = $uploadDir . $fileName;
+
+        // Mover archivo
+        if (move_uploaded_file($fileData['tmp_name'], $destination)) {
+            return '/uploads/authors/' . $fileName; // Ruta relativa para guardar en DB
+        }
+
+        return false;
     }
 }
