@@ -8,12 +8,24 @@ class Book
         $this->db = $db;
     }
 
-    // Obtener todos los libros
     public function getAllBooks()
     {
-        $this->db->query("SELECT * FROM libros ORDER BY id DESC");
+        $this->db->query("
+        SELECT
+            l.*,
+            CONCAT(au.nombres, ' ', au.apellidos) AS autor,
+            ed.editorial AS editorial,
+            m.materia AS materia
+        FROM libros l
+        JOIN autores au ON l.id_autor = au.id
+        JOIN editoriales ed ON l.id_editorial = ed.id
+        JOIN materias m ON l.id_materia = m.id
+        ORDER BY l.id DESC
+    ");
+
         return $this->db->resultSet();
     }
+
 
     // Obtener libro por ID
     public function getBookById($id)
@@ -174,9 +186,16 @@ class Book
     private function bindBookParams($data)
     {
         $fields = [
-            'titulo', 'descripcion', 'portada', 'id_autor',
-            'id_editorial', 'id_materia', 'anio_edicion',
-            'num_paginas', 'isbn', 'estado'
+            'titulo',
+            'descripcion',
+            'portada',
+            'id_autor',
+            'id_editorial',
+            'id_materia',
+            'anio_edicion',
+            'num_paginas',
+            'isbn',
+            'estado'
         ];
 
         foreach ($fields as $field) {

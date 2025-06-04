@@ -1,94 +1,133 @@
-<!-- Formulario para crear o editar un estudiante -->
-<form action="<?= $form_action ?>" method="POST" novalidate>
+<!-- Formulario para crear o editar un libro -->
+<form action="<?= $form_action ?>" method="POST" enctype="multipart/form-data" novalidate>
 
-    <!-- Grupo 1: Datos de identificación -->
+    <!-- Grupo 1: Datos del libro -->
     <div class="grupo-campos">
-        <!-- Campo: Código del estudiante -->
-        <div class="campo <?= isset($errors['codigo']) ? 'error-input' : '' ?>">
-            <label for="codigo">Código</label>
-            <input type="text" name="codigo" id="codigo"
-                   value="<?= htmlspecialchars($student->codigo ?? '') ?>" required>
-            <?php if (isset($errors['codigo'])): ?>
-                <span class="error"><?= htmlspecialchars($errors['codigo']) ?></span>
+        <!-- Campo: Título -->
+        <div class="campo campo-ancho <?= isset($errors['titulo']) ? 'error-input' : '' ?>">
+            <label for="titulo">Título*</label>
+            <input type="text" name="titulo" id="titulo"
+                   value="<?= htmlspecialchars($book->titulo ?? '') ?>" required>
+            <?php if (isset($errors['titulo'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['titulo']) ?></span>
             <?php endif; ?>
         </div>
 
-        <!-- Campo: DNI del estudiante -->
-        <div class="campo <?= isset($errors['dni']) ? 'error-input' : '' ?>">
-            <label for="dni">DNI</label>
-            <input type="text" name="dni" id="dni"
-                   value="<?= htmlspecialchars($student->dni ?? '') ?>" required>
-            <?php if (isset($errors['dni'])): ?>
-                <span class="error"><?= htmlspecialchars($errors['dni']) ?></span>
+        <!-- Campo: Descripción -->
+        <div class="campo campo-ancho <?= isset($errors['descripcion']) ? 'error-input' : '' ?>">
+            <label for="descripcion">Descripción</label>
+            <textarea name="descripcion" id="descripcion" rows="3"><?= htmlspecialchars($book->descripcion ?? '') ?></textarea>
+            <?php if (isset($errors['descripcion'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['descripcion']) ?></span>
             <?php endif; ?>
         </div>
 
-        <!-- Campo: Estado del estudiante (activo/inactivo) -->
-        <div class="campo">
-            <label for="estado">Estado</label>
-            <select name="estado" id="estado" required>
-                <option value="1" <?= (isset($student->estado) && $student->estado == 1) ? 'selected' : '' ?>>Activo</option>
-                <option value="0" <?= (isset($student->estado) && $student->estado == 0) ? 'selected' : '' ?>>Inactivo</option>
-            </select>
+        <!-- Campo: Portada -->
+        <div class="campo <?= isset($errors['portada']) ? 'error-input' : '' ?>">
+            <label for="portada">Portada</label>
+            <input type="file" name="portada" id="portada" accept="image/*">
+            <?php if (isset($errors['portada'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['portada']) ?></span>
+            <?php endif; ?>
         </div>
     </div>
 
-    <!-- Grupo 2: Datos personales -->
+    <!-- Grupo 2: Relaciones -->
     <div class="grupo-campos">
-        <!-- Campo: Nombre completo -->
-        <div class="campo campo-ancho <?= isset($errors['nombre']) ? 'error-input' : '' ?>">
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre"
-                   value="<?= htmlspecialchars($student->nombre ?? '') ?>" required>
-            <?php if (isset($errors['nombre'])): ?>
-                <span class="error"><?= htmlspecialchars($errors['nombre']) ?></span>
-            <?php endif; ?>
-        </div>
-
-        <!-- Campo: Carrera (select con opciones disponibles) -->
-        <div class="campo campo-ancho <?= isset($errors['carrera']) ? 'error-input' : '' ?>">
-            <label for="carrera">Carrera</label>
-            <select name="carrera" id="carrera" required>
-                <option value="">Seleccione una carrera</option>
-                <?php foreach ($careers as $career): ?>
-                    <option value="<?= htmlspecialchars($career) ?>"
-                        <?= (isset($student->carrera) && $student->carrera === $career) ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($career) ?>
+        <!-- Campo: Autor -->
+        <div class="campo <?= isset($errors['id_autor']) ? 'error-input' : '' ?>">
+            <label for="id_autor">Autor*</label>
+            <select name="id_autor" id="id_autor" required>
+                <option value="">Seleccione un autor</option>
+                <?php foreach ($autores as $autor): ?>
+                    <option value="<?= $autor->id ?>" <?= (isset($book->id_autor) && $book->id_autor == $autor->id) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($autor->nombres) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
-            <?php if (isset($errors['carrera'])): ?>
-                <span class="error"><?= htmlspecialchars($errors['carrera']) ?></span>
+            <?php if (isset($errors['id_autor'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['id_autor']) ?></span>
+            <?php endif; ?>
+        </div>
+
+        <!-- Campo: Editorial -->
+        <div class="campo <?= isset($errors['id_editorial']) ? 'error-input' : '' ?>">
+            <label for="id_editorial">Editorial*</label>
+            <select name="id_editorial" id="id_editorial" required>
+                <option value="">Seleccione una editorial</option>
+                <?php foreach ($editoriales as $editorial): ?>
+                    <option value="<?= $editorial->id ?>" <?= (isset($book->id_editorial) && $book->id_editorial == $editorial->id) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($editorial->editorial) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <?php if (isset($errors['id_editorial'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['id_editorial']) ?></span>
+            <?php endif; ?>
+        </div>
+
+        <!-- Campo: Materia -->
+        <div class="campo <?= isset($errors['id_materia']) ? 'error-input' : '' ?>">
+            <label for="id_materia">Materia*</label>
+            <select name="id_materia" id="id_materia" required>
+                <option value="">Seleccione una materia</option>
+                <?php foreach ($materias as $materia): ?>
+                    <option value="<?= $materia->id ?>" <?= (isset($book->id_materia) && $book->id_materia == $materia->id) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($materia->materia) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <?php if (isset($errors['id_materia'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['id_materia']) ?></span>
             <?php endif; ?>
         </div>
     </div>
 
-    <!-- Grupo 3: Datos de contacto -->
+    <!-- Grupo 3: Año, páginas, ISBN y estado -->
     <div class="grupo-campos">
-        <!-- Campo: Dirección -->
-        <div class="campo campo-ancho <?= isset($errors['direccion']) ? 'error-input' : '' ?>">
-            <label for="direccion">Dirección</label>
-            <input type="text" name="direccion" id="direccion"
-                   value="<?= htmlspecialchars($student->direccion ?? '') ?>">
-            <?php if (isset($errors['direccion'])): ?>
-                <span class="error"><?= htmlspecialchars($errors['direccion']) ?></span>
+        <!-- Año de edición -->
+        <div class="campo <?= isset($errors['anio_edicion']) ? 'error-input' : '' ?>">
+            <label for="anio_edicion">Año de edición*</label>
+            <input type="number" name="anio_edicion" id="anio_edicion" min="1000" max="2100"
+                   value="<?= htmlspecialchars($book->anio_edicion ?? '') ?>" required>
+            <?php if (isset($errors['anio_edicion'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['anio_edicion']) ?></span>
             <?php endif; ?>
         </div>
 
-        <!-- Campo: Teléfono -->
-        <div class="campo <?= isset($errors['telefono']) ? 'error-input' : '' ?>">
-            <label for="telefono">Teléfono</label>
-            <input type="text" name="telefono" id="telefono"
-                   value="<?= htmlspecialchars($student->telefono ?? '') ?>">
-            <?php if (isset($errors['telefono'])): ?>
-                <span class="error"><?= htmlspecialchars($errors['telefono']) ?></span>
+        <!-- Número de páginas -->
+        <div class="campo <?= isset($errors['num_paginas']) ? 'error-input' : '' ?>">
+            <label for="num_paginas">N° de páginas</label>
+            <input type="number" name="num_paginas" id="num_paginas" min="1"
+                   value="<?= htmlspecialchars($book->num_paginas ?? '') ?>">
+            <?php if (isset($errors['num_paginas'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['num_paginas']) ?></span>
             <?php endif; ?>
+        </div>
+
+        <!-- ISBN -->
+        <div class="campo <?= isset($errors['isbn']) ? 'error-input' : '' ?>">
+            <label for="isbn">ISBN</label>
+            <input type="text" name="isbn" id="isbn"
+                   value="<?= htmlspecialchars($book->isbn ?? '') ?>">
+            <?php if (isset($errors['isbn'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['isbn']) ?></span>
+            <?php endif; ?>
+        </div>
+
+        <!-- Estado -->
+        <div class="campo">
+            <label for="estado">Estado</label>
+            <select name="estado" id="estado" required>
+                <option value="1" <?= (isset($book->estado) && $book->estado == 1) ? 'selected' : '' ?>>Activo</option>
+                <option value="0" <?= (isset($book->estado) && $book->estado == 0) ? 'selected' : '' ?>>Inactivo</option>
+            </select>
         </div>
     </div>
 
-    <!-- Grupo de botones -->
+    <!-- Botones -->
     <div class="contenedor-botones">
-        <a href="/students" class="boton boton-cancelar">Cancelar</a>
+        <a href="/books" class="boton boton-cancelar">Cancelar</a>
         <button type="submit" class="boton boton-registrar">Guardar</button>
     </div>
 </form>
