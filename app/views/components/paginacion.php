@@ -10,7 +10,7 @@
  * - $total_registros (int): Total de registros en la lista.
  * - $inicio (int): Índice del primer registro mostrado.
  * - $fin (int): Índice del último registro mostrado.
- * - $base_url (string): URL base para los enlaces de paginación.
+ * - $ruta_base (string): Ruta para los enlaces de paginación.
  */
 
 ?>
@@ -20,19 +20,19 @@
         <ul class="paginacion-list">
             <!-- Enlace a la página anterior -->
             <li class="paginacion-item <?= $pagina_actual <= 1 ? 'disabled' : '' ?>">
-                <a href="<?= $base_url ?>?pagina=<?= $pagina_actual - 1 ?>" class="paginacion-link">Anterior</a>
+                <a href="<?= $ruta_base ?>?pagina=<?= $pagina_actual - 1 ?>" class="paginacion-link">Anterior</a>
             </li>
 
             <!-- Enlaces numerados a cada página -->
             <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
                 <li class="paginacion-item <?= $i == $pagina_actual ? 'active' : '' ?>">
-                    <a href="<?= $base_url ?>?pagina=<?= $i ?>" class="paginacion-link"><?= $i ?></a>
+                    <a href="<?= $ruta_base ?>?pagina=<?= $i ?>" class="paginacion-link"><?= $i ?></a>
                 </li>
             <?php endfor; ?>
 
             <!-- Enlace a la página siguiente -->
             <li class="paginacion-item <?= $pagina_actual >= $total_paginas ? 'disabled' : '' ?>">
-                <a href="<?= $base_url ?>?pagina=<?= $pagina_actual + 1 ?>" class="paginacion-link">Siguiente</a>
+                <a href="<?= $ruta_base ?>?pagina=<?= $pagina_actual + 1 ?>" class="paginacion-link">Siguiente</a>
             </li>
         </ul>
     </nav>
