@@ -4,18 +4,17 @@ class AuthController
     private $db;
     private $userModel;
 
-    // Constructor: inicializa la base de datos y el modelo de usuario
     public function __construct($db)
     {
+        session_start();
         $this->db = $db;
         $this->userModel = new User($db);
     }
 
-    // Muestra la vista de login si el usuario no está autenticado
     public function showLogin()
     {
         if ($this->isLoggedIn()) {
-            header('Location: /dashboard'); // Redirige si ya está logueado
+            header('Location: /dashboard');
             exit;
         }
 
@@ -24,7 +23,6 @@ class AuthController
         require_once __DIR__ . '/../views/layouts/layout.php';
     }
 
-    // Muestra la vista de registro si el usuario no está autenticado
     public function showRegister()
     {
         if ($this->isLoggedIn()) {
@@ -37,77 +35,75 @@ class AuthController
         require_once __DIR__ . '/../views/layouts/layout.php';
     }
 
-    // Procesa el inicio de sesión
     public function login($data)
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $email = trim($data['email']);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = filter_var(trim($data['email']), FILTER_SANITIZE_EMAIL);
             $password = trim($data['password']);
 
-            // Verifica las credenciales en el modelo
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL) || empty($password)) {
+                $_SESSION['error'] = 'Credenciales inválidas.';
+                header('Location: /login');
+                exit;
+            }
+
             $user = $this->userModel->login($email, $password);
 
             if ($user) {
-                // Si es correcto, inicia sesión
+                $user->permisos = $this->userModel->getPermisos($user->id);
                 $this->createUserSession($user);
                 header('Location: /dashboard');
                 exit;
             } else {
-                // Si no, muestra mensaje de error y redirige
-                $_SESSION['error'] = 'Email o contraseña incorrectos';
+                $_SESSION['error'] = 'Email o contraseña incorrectos.';
                 header('Location: /login');
                 exit;
             }
         }
     }
 
-    // Procesa el registro de un nuevo usuario
     public function register($data)
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $name = trim($data['name']);
-            $email = trim($data['email']);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = htmlspecialchars(trim($data['name']));
+            $email = filter_var(trim($data['email']), FILTER_SANITIZE_EMAIL);
             $password = trim($data['password']);
-            $confirm_password = trim($data['confirm_password']);
+            $confirmPassword = trim($data['confirm_password']);
 
-            // Validaciones básicas
-            if (empty($name) || empty($email) || empty($password)) {
-                $_SESSION['error'] = 'Por favor complete todos los campos';
+            if (empty($name) || !filter_var($email, FILTER_VALIDATE_EMAIL) || empty($password)) {
+                $_SESSION['error'] = 'Complete todos los campos correctamente.';
                 header('Location: /register');
                 exit;
             }
 
-            if ($password !== $confirm_password) {
-                $_SESSION['error'] = 'Las contraseñas no coinciden';
+            if ($password !== $confirmPassword) {
+                $_SESSION['error'] = 'Las contraseñas no coinciden.';
                 header('Location: /register');
                 exit;
             }
 
-            // Verifica si el correo ya existe
             if ($this->userModel->findUserByEmail($email)) {
-                $_SESSION['error'] = 'El email ya está registrado';
+                $_SESSION['error'] = 'El email ya está registrado.';
                 header('Location: /register');
                 exit;
             }
 
-            // Intenta registrar el nuevo usuario
             if ($this->userModel->register([
                 'name' => $name,
                 'email' => $email,
                 'password' => $password
             ])) {
-                $_SESSION['success'] = 'Registro exitoso. Por favor inicie sesión';
+                $_SESSION['success'] = 'Registro exitoso. Inicie sesión.';
                 header('Location: /login');
                 exit;
             } else {
-                $_SESSION['error'] = 'Algo salió mal. Intente nuevamente';
+                $_SESSION['error'] = 'Error al registrar. Intente nuevamente.';
                 header('Location: /register');
                 exit;
             }
         }
     }
 
-    // Cierra la sesión del usuario
     public function logout()
     {
         session_unset();
@@ -116,15 +112,15 @@ class AuthController
         exit;
     }
 
-    // Crea una sesión para el usuario autenticado
     private function createUserSession($user)
     {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
-        $_SESSION['user_name'] = $user->name;
+        $_SESSION['user_name'] = htmlspecialchars($user->name);
+        $_SESSION['user_rol'] = $user->rol ?? 'Estudiante';
+        $_SESSION['user_permisos'] = $user->permisos ?? [];
     }
 
-    // Verifica si el usuario ha iniciado sesión
     private function isLoggedIn()
     {
         return isset($_SESSION['user_id']);

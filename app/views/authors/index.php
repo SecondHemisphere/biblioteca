@@ -58,7 +58,7 @@ $fin = min($total_registros, $pagina_actual * $por_pagina);
         $filas = $registros_paginados;
         $ruta_base = '/authors';
 
-        include __DIR__ . '/../components/tabla-con-imagenes.php';
+        include __DIR__ . '/../components/tabla-generica.php';
         ?>
     </div>
 

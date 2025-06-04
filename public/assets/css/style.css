@@ -452,23 +452,29 @@ body {
 }
 
 .contenedor-tabla {
-  overflow-x: auto;
-  margin: 0.5rem 0;
+  padding-top: 1rem;
 }
 
 .contenedor-tabla table {
-  width: 100%;
-  margin: 0 auto;
+  width: auto;
   border-collapse: collapse;
-  font-size: 1.4rem;
-  margin-top: 1rem;
-  margin-bottom: 0rem;
+  table-layout: auto;
 }
 
 .contenedor-tabla th,
 .contenedor-tabla td {
+  padding: 8px 12px;
   white-space: nowrap;
+  vertical-align: middle;
+  text-align: left;
   border: 0.1rem solid #e0e0e0;
+  font-size: 1.4rem;
+}
+
+.contenedor-imagen-tabla img {
+  max-height: 50px;
+  height: auto;
+  width: auto;
 }
 
 .contenedor-tabla th {
@@ -493,42 +499,128 @@ body {
   background-color: #f8f9fa;
 }
 
-.accion-icon {
-  font-size: 2.4rem;
-}
-.acciones-container {
+/* Celdas de imagen */
+.contenedor-tabla .contenedor-imagen-tabla {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contenedor-tabla .contenedor-imagen-tabla img {
+  width: 100%;
   height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.btn-accion {
-  width: 30px;
-  height: 30px;
-  display: inline-flex;
-  justify-content: center;
+.contenedor-tabla .contenedor-imagen-tabla:hover img {
+  transform: scale(1.05);
+}
+
+.contenedor-tabla .imagen-placeholder {
+  width: 60px;
+  height: 60px;
+  background-color: #f1f3f5;
+  border-radius: 4px;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  color: #adb5bd;
+}
+
+.contenedor-tabla .imagen-placeholder svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.contenedor-tabla .estado {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.contenedor-tabla .estado.activo {
+  background-color: #e6f7ee;
+  color: #0a7e4a;
+}
+
+.contenedor-tabla .estado.inactivo {
+  background-color: #fde8e8;
+  color: #c81e1e;
+}
+
+/* Botones de acción */
+.contenedor-tabla .celda-acciones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.contenedor-tabla .boton-accion {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  color: white;
-  text-decoration: none;
+  background: transparent;
   cursor: pointer;
-  font-size: 1.5rem;
+  margin: 0 2px;
+  padding: 0;
+  transition: all 0.2s ease;
 }
 
-.btn-editar {
-  background-color: #3498db;
+.contenedor-tabla .boton-accion svg {
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
-.btn-eliminar {
-  background-color: #e74c3c;
+.contenedor-tabla .boton-accion.editar {
+  color: #2c7be5;
+  border: 1px solid #2c7be5;
 }
 
-.form-eliminar {
+.contenedor-tabla .boton-accion.editar:hover {
+  background: #2c7be5;
+  color: white;
+}
+
+.contenedor-tabla .boton-accion.eliminar {
+  color: #e63757;
+  border: 1px solid #e63757;
+}
+
+.contenedor-tabla .boton-accion.eliminar:hover {
+  background: #e63757;
+  color: white;
+}
+
+/* Mensaje sin registros */
+.contenedor-tabla .sin-registros {
+  padding: 40px 20px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.contenedor-tabla .sin-registros svg {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 15px;
+  color: #adb5bd;
+}
+
+.contenedor-tabla .sin-registros p {
   margin: 0;
+  font-size: 1.1rem;
 }
 
 .nuevo-registro {

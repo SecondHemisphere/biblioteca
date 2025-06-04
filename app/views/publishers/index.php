@@ -45,7 +45,7 @@ $fin = min($total_registros, $pagina_actual * $por_pagina);
         $columnas = [
             ['campo' => 'id', 'titulo' => 'ID'],
             ['campo' => 'editorial', 'titulo' => 'Nombre'],
-            ['campo' => 'estado', 'titulo' => 'Estado'],
+            ['campo' => 'estado', 'titulo' => 'Estado', 'tipo' => 'estado']
         ];
 
         $filas = $registros_paginados;

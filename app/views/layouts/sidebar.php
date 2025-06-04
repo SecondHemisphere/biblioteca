@@ -3,8 +3,8 @@
     <div class="user-info">
         <div class="user-avatar">J</div>
         <div class="user-details">
-            <div class="user-name">Juan Pérez</div>
-            <div class="user-role">Administrador</div>
+            <div class="user-name"><?= $_SESSION['user_name'] ?? 'Invitado' ?></div>
+            <div class="user-role"><?= $_SESSION['user_rol'] ?? 'Sin rol' ?></div>
         </div>
     </div>
     <!-- Menú -->
