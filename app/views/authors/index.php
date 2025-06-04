@@ -46,19 +46,19 @@ $fin = min($total_registros, $pagina_actual * $por_pagina);
             ['campo' => 'id', 'titulo' => 'ID'],
             ['campo' => 'nombres', 'titulo' => 'Nombres'],
             ['campo' => 'apellidos', 'titulo' => 'Apellidos'],
-            ['campo' => 'fecha_nacimiento', 'titulo' => 'Fecha de Nacimiento'],
-            ['campo' => 'fecha_fallecimiento', 'titulo' => 'Fecha de Fallecimiento'],
+            ['campo' => 'fecha_nacimiento', 'titulo' => 'Nacimiento', 'tipo' => 'fecha'],
+            ['campo' => 'fecha_fallecimiento', 'titulo' => 'Fallecimiento', 'tipo' => 'fecha'],
             ['campo' => 'nacionalidad', 'titulo' => 'Nacionalidad'],
             ['campo' => 'campo_estudio', 'titulo' => 'Campo de Estudio'],
             ['campo' => 'biografia', 'titulo' => 'Biografía'],
-            ['campo' => 'imagen', 'titulo' => 'Imagen'],
-            ['campo' => 'estado', 'titulo' => 'Estado'],
+            ['campo' => 'imagen', 'titulo' => 'Foto', 'tipo' => 'imagen'],
+            ['campo' => 'estado', 'titulo' => 'Estado', 'tipo' => 'estado']
         ];
 
         $filas = $registros_paginados;
         $ruta_base = '/authors';
 
-        include __DIR__ . '/../components/tabla-generica.php';
+        include __DIR__ . '/../components/tabla-con-imagenes.php';
         ?>
     </div>
 
